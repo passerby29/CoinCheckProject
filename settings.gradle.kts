@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Crypto XML Project New"
 include(":app")
- 
+include(":domain")
