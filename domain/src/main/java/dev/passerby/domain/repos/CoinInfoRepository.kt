@@ -9,8 +9,7 @@ interface CoinInfoRepository {
     suspend fun getCoinHistory(coinId: String): LiveData<CoinHistoryModel>
     suspend fun getCoinInfo(coinId: String): LiveData<CoinModel>
 
-    suspend fun loadCoinHistory(coinId: String)
-    suspend fun loadCoinInfo(coinId: String)
+    suspend fun loadCoinHistory(coinId: String, period: String): LiveData<CoinHistoryModel>?
 
     suspend fun addCoinToFav(coinModel: CoinModel)
     suspend fun removeCoinFromFav(coinId: String)
