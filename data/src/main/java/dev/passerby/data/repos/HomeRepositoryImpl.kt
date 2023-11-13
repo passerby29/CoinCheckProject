@@ -15,9 +15,7 @@ import dev.passerby.data.network.ApiFactory
 import dev.passerby.data.network.BaseResponse
 import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.repos.HomeRepository
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 class HomeRepositoryImpl(application: Application) : HomeRepository {
 
@@ -30,6 +28,29 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
     private val coinHistoryMapper = CoinHistoryMapper()
     private var coinsListResult: MutableLiveData<BaseResponse<CoinsListDto>> = MutableLiveData()
     private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
+    private val monthNames = listOf(
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    )
+    private val dayNames = listOf(
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    )
 
     override fun getCoinsList(): LiveData<List<CoinModel>> {
         val coinsList = coinDao.getCoinsList()
@@ -38,9 +59,11 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
 
     override fun getDate(): LiveData<String> {
         val dateLiveData = MutableLiveData("")
-        val time = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN)
-        dateLiveData.value = formatter.format(time)
+        val calendar = Calendar.getInstance()
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH)
+        dateLiveData.value = "${dayNames[dayOfWeek]}, ${day}th ${monthNames[month]}"
         return dateLiveData
     }
 

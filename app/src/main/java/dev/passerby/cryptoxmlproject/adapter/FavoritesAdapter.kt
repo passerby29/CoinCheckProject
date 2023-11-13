@@ -15,6 +15,8 @@ import java.text.DecimalFormat
 class FavoritesAdapter(private val context: Context) :
     ListAdapter<CoinModel, FavoritesViewHolder>(FavoritesDiffCallback()) {
 
+    var onFavItemCLickListener: ((CoinModel) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemView =
@@ -31,6 +33,7 @@ class FavoritesAdapter(private val context: Context) :
             favoriteSymbolTexView.text = item.symbol
             favoritePriceTextView.text = roundDouble(item.price)
             favoriteChangeTextView.text = item.priceChange1h.toString()
+            favoriteMoreButton.setOnClickListener { onFavItemCLickListener?.invoke(item) }
         }
     }
 
