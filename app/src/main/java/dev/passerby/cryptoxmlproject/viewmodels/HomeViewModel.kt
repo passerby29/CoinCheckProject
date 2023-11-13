@@ -2,8 +2,10 @@ package dev.passerby.cryptoxmlproject.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import dev.passerby.data.repos.HomeRepositoryImpl
+import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.usecases.SearchCoinsUseCase
 import dev.passerby.domain.usecases.get.GetCoinsListUseCase
 import dev.passerby.domain.usecases.get.GetDateUseCase
@@ -35,8 +37,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun searchCoins(coinFilter: String){
-        searchCoinsUseCase(coinFilter)
+    fun searchCoins(coinFilter: String): LiveData<List<CoinModel>>{
+        return searchCoinsUseCase(coinFilter)
     }
 
     private fun loadCoinsHistory() = viewModelScope.launch {

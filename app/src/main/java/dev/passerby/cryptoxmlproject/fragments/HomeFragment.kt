@@ -1,19 +1,34 @@
 package dev.passerby.cryptoxmlproject.fragments
 
+import android.animation.AnimatorSet
+import android.animation.ValueAnimator
+import android.app.Activity
+import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
+import dev.passerby.cryptoxmlproject.adapter.CoinPredictionsAdapter
 import dev.passerby.cryptoxmlproject.adapter.CoinsAdapter
 import dev.passerby.cryptoxmlproject.adapter.FavoritesAdapter
 import dev.passerby.cryptoxmlproject.databinding.FragmentHomeBinding
 import dev.passerby.cryptoxmlproject.viewmodels.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
+
 
 class HomeFragment : Fragment() {
 
@@ -26,8 +41,9 @@ class HomeFragment : Fragment() {
     }
 
     private lateinit var coinsAdapter: CoinsAdapter
+    private lateinit var coinPredictionsAdapter: CoinPredictionsAdapter
     private lateinit var favoritesAdapter: FavoritesAdapter
-    private var state = BottomSheetBehavior.STATE_COLLAPSED
+    private var filterString = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -41,15 +57,84 @@ class HomeFragment : Fragment() {
         initAdapters()
         initRecyclerView()
         initViewPager()
-//        initBottomSheet()
+        initBottomSheet()
+        initSearch()
         observeViewModel()
-        binding.homeShowAllButton.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToBottomSheetFragment())
+
+        binding.homeSettingsButton.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToSettingsFragment()
+            )
         }
+
+        binding.homeFavoritesPlaceholderContainer.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToBottomSheetFragment()
+            )
+        }
+    }
+
+    private fun initSearch() {
+        var isSearchOpen = false
+        binding.homeSearchButton.setOnClickListener {
+            isSearchOpen = if (isSearchOpen) {
+                slideView(binding.homeDateTextView, 1, 264)
+                slideView(binding.homeSearchEditText, 272, 1)
+                false
+            } else {
+                slideView(binding.homeDateTextView, 264, 1)
+                slideView(binding.homeSearchEditText, 1, 272)
+                true
+            }
+            binding.homeSearchPredictionsContainer.visibility = if (isSearchOpen){
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            if (!isSearchOpen){
+                hideSoftKeyboard(requireActivity(), binding.homeSearchEditText)
+            } else {
+                openSoftKeyboard(requireActivity(), binding.homeSearchEditText)
+            }
+        }
+
+        binding.homeSearchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(filter: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(200)
+                    if (filter?.isNotEmpty() == true) {
+                        filterString =
+                            StringBuilder().append("%").append(filter.trim()).append("%").toString()
+                        viewModel.searchCoins(filterString).observe(viewLifecycleOwner) {
+                            coinPredictionsAdapter.submitList(it)
+                        }
+                    }
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
+    }
+
+    private fun hideSoftKeyboard(activity: Activity, view: View) {
+        view.clearFocus()
+        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.applicationWindowToken, 0)
+    }
+
+    private fun openSoftKeyboard(activity: Activity, view: View) {
+        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, 0)
     }
 
     private fun initAdapters() {
         coinsAdapter = CoinsAdapter(requireContext())
+        coinPredictionsAdapter = CoinPredictionsAdapter(requireContext())
         favoritesAdapter = FavoritesAdapter(requireContext())
     }
 
@@ -60,7 +145,17 @@ class HomeFragment : Fragment() {
             )
             adapter = coinsAdapter
         }
+
+        binding.homeSearchPredictionsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(), LinearLayoutManager.VERTICAL, false
+            )
+            adapter = coinPredictionsAdapter
+        }
+
         setOnCoinClickListener()
+        setOnPredictionClickListener()
+        setOnFavoriteClickListener()
     }
 
     private fun initViewPager() {
@@ -72,49 +167,30 @@ class HomeFragment : Fragment() {
         }
     }
 
-//    private fun initBottomSheet() {
-//        val behavior = BottomSheetBehavior.from(binding.homeBottomSheetContainer)
-//        behavior.apply {
-//            peekHeight = (resources.displayMetrics.heightPixels * 0.55).toInt()
-//            isHideable = false
-//
-//            addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-//                override fun onStateChanged(bottomSheet: View, newState: Int) {
-//                    when (newState) {
-//                        BottomSheetBehavior.STATE_EXPANDED -> {
-//                            viewModel.coinsList.observe(viewLifecycleOwner) {
-//                                coinsAdapter.submitList(it)
-//                            }
-//                        }
-//
-//                        BottomSheetBehavior.STATE_COLLAPSED -> {
-//                            viewModel.topCoinsList.observe(viewLifecycleOwner) {
-//                                coinsAdapter.submitList(it)
-//                            }
-//                            binding.homeCoinsRecyclerView.isNestedScrollingEnabled = false
-//                        }
-//
-//                        BottomSheetBehavior.STATE_DRAGGING -> {}
-//                        BottomSheetBehavior.STATE_HIDDEN -> {}
-//                        BottomSheetBehavior.STATE_SETTLING -> {}
-//                        BottomSheetBehavior.STATE_HALF_EXPANDED -> {}
-//                    }
-//                }
-//
-//                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-//                }
-//            })
-//        }
-//
-//        binding.homeShowAllButton.setOnClickListener {
-//            behavior.state = BottomSheetBehavior.STATE_EXPANDED
-//        }
-//    }
+    private fun initBottomSheet() {
+        binding.homeShowAllButton.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToBottomSheetFragment())
+        }
+    }
 
     private fun observeViewModel() {
         viewModel.topCoinsList.observe(viewLifecycleOwner) {
-            favoritesAdapter.submitList(it)
             coinsAdapter.submitList(it)
+        }
+        viewModel.currentDate.observe(viewLifecycleOwner) {
+            binding.homeDateTextView.text = it
+        }
+        viewModel.favCoinsList.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.homeFavoritesPlaceholderContainer.visibility = View.VISIBLE
+                binding.homeFavoritesPager.visibility = View.INVISIBLE
+                binding.homeFavoritesTabLayout.visibility = View.INVISIBLE
+            } else {
+                binding.homeFavoritesPlaceholderContainer.visibility = View.GONE
+                binding.homeFavoritesPager.visibility = View.VISIBLE
+                binding.homeFavoritesTabLayout.visibility = View.VISIBLE
+            }
+            favoritesAdapter.submitList(it)
         }
     }
 
@@ -124,6 +200,37 @@ class HomeFragment : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
             )
         }
+    }
+
+    private fun setOnPredictionClickListener() {
+        coinPredictionsAdapter.onPredictionItemCLickListener = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+            )
+        }
+    }
+
+    private fun setOnFavoriteClickListener() {
+        favoritesAdapter.onFavItemCLickListener = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+            )
+        }
+    }
+
+    private fun slideView(view: View, currentWidth: Int, newWidth: Int) {
+        val slideAnimator = ValueAnimator.ofInt(currentWidth, newWidth).setDuration(500)
+
+        slideAnimator.addUpdateListener { animation1: ValueAnimator ->
+            val value = animation1.animatedValue as Int
+            view.layoutParams.width =
+                (value * Resources.getSystem().displayMetrics.density).roundToInt()
+            view.requestLayout()
+        }
+        val animationSet = AnimatorSet()
+        animationSet.interpolator = AccelerateDecelerateInterpolator()
+        animationSet.play(slideAnimator)
+        animationSet.start()
     }
 
     override fun onDestroy() {

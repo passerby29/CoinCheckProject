@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.R.id.design_bottom_sheet
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -37,6 +38,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         super.onStart()
         coinsAdapter = CoinsAdapter(requireContext())
 
+        setOnCoinClickListener()
+
         binding.homeBigRecyclerView.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -49,6 +52,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         viewModel.coinsList.observe(viewLifecycleOwner) {
             coinsAdapter!!.submitList(it)
         }
+
 
         val density = requireContext().resources.displayMetrics.density
         dialog?.let {
@@ -65,11 +69,16 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (slideOffset < 0.4) {
-                        behavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    }
                 }
             })
+        }
+    }
+
+    private fun setOnCoinClickListener() {
+        coinsAdapter?.onCoinItemCLickListener = {
+            findNavController().navigate(
+                BottomSheetFragmentDirections.actionBottomSheetFragmentToCoinInfoFragment(it.rank, it.id)
+            )
         }
     }
 
