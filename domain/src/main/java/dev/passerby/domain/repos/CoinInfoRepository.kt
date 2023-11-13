@@ -6,8 +6,8 @@ import dev.passerby.domain.models.CoinModel
 
 interface CoinInfoRepository {
 
-    suspend fun getCoinHistory(coinId: String): LiveData<CoinHistoryModel>
-    suspend fun getCoinInfo(coinId: String): LiveData<CoinModel>
+    fun getCoinHistory(coinId: String): LiveData<CoinHistoryModel>
+    fun getCoinInfo(coinId: String): LiveData<CoinModel>
 
     suspend fun loadCoinHistory(coinId: String, period: String): LiveData<CoinHistoryModel>?
 
