@@ -27,14 +27,14 @@ class CoinInfoRepositoryImpl(application: Application) : CoinInfoRepository {
     private val coinHistoryMapper = CoinHistoryMapper()
     private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
 
-    override suspend fun getCoinHistory(coinId: String): LiveData<CoinHistoryModel> {
+    override fun getCoinHistory(coinId: String): LiveData<CoinHistoryModel> {
         val coinHistory = coinHistoryDao.getCoinHistory(coinId)
         return coinHistory.map {
             coinHistoryMapper.mapDbModelToEntity(it ?: CoinHistoryDbModel(0, "", emptyList()))
         }
     }
 
-    override suspend fun getCoinInfo(coinId: String): LiveData<CoinModel> {
+    override fun getCoinInfo(coinId: String): LiveData<CoinModel> {
         val coinInfo = coinDao.getCoinInfo(coinId)
         return coinInfo.map { coinMapper.mapDbModelToEntity(it) }
     }

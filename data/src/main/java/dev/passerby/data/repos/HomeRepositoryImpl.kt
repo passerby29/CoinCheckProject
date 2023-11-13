@@ -31,12 +31,12 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
     private var coinsListResult: MutableLiveData<BaseResponse<CoinsListDto>> = MutableLiveData()
     private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
 
-    override suspend fun getCoinsList(): LiveData<List<CoinModel>> {
+    override fun getCoinsList(): LiveData<List<CoinModel>> {
         val coinsList = coinDao.getCoinsList()
         return getEntityList(coinsList)
     }
 
-    override suspend fun getDate(): LiveData<String> {
+    override fun getDate(): LiveData<String> {
         val dateLiveData = MutableLiveData("")
         val time = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN)
@@ -44,12 +44,12 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
         return dateLiveData
     }
 
-    override suspend fun getFavCoinsList(): LiveData<List<CoinModel>> {
+    override fun getFavCoinsList(): LiveData<List<CoinModel>> {
         val favoriteList = favoriteDao.getFavoritesList()
         return getEntityList(favoriteList)
     }
 
-    override suspend fun getTopCoinsList(): LiveData<List<CoinModel>> {
+    override fun getTopCoinsList(): LiveData<List<CoinModel>> {
         val coinsList = coinDao.getTopCoins()
         return getEntityList(coinsList)
     }
@@ -97,7 +97,7 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
         }
     }
 
-    override suspend fun searchCoins(coinFilter: String): LiveData<List<CoinModel>> {
+    override fun searchCoins(coinFilter: String): LiveData<List<CoinModel>> {
         val coinsList = coinDao.searchCoins(coinFilter)
         return getEntityList(coinsList)
     }
