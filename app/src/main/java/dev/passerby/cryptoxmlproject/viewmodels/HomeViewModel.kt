@@ -32,18 +32,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            loadCoinsHistory()
             loadCoinsListUseCase()
+            loadCoinsHistoryUseCase()
         }
     }
 
-    fun searchCoins(coinFilter: String): LiveData<List<CoinModel>>{
+    fun searchCoins(coinFilter: String): LiveData<List<CoinModel>> {
         return searchCoinsUseCase(coinFilter)
-    }
-
-    private fun loadCoinsHistory() = viewModelScope.launch {
-        coinsList.value?.forEach {
-            loadCoinsHistoryUseCase(it.rank, it.name)
-        }
     }
 }

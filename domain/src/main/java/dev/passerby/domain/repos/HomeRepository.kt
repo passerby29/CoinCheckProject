@@ -10,7 +10,7 @@ interface HomeRepository {
     fun getFavCoinsList(): LiveData<List<CoinModel>>
     fun getTopCoinsList(): LiveData<List<CoinModel>>
 
-    suspend fun loadCoinsHistory(rank: Int, coinId: String)
+    suspend fun loadCoinsHistory()
     suspend fun loadCoinsList()
 
     fun searchCoins(coinFilter: String): LiveData<List<CoinModel>>

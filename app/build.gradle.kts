@@ -67,4 +67,6 @@ dependencies {
     //vico
     implementation("com.patrykandpatrick.vico:core:1.12.0")
     implementation("com.patrykandpatrick.vico:views:1.12.0")
+    //williamChart
+    implementation("com.diogobernardino:williamchart:3.10.1")
 }
