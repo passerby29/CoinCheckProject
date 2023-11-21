@@ -3,6 +3,7 @@ package dev.passerby.domain.repos
 import androidx.lifecycle.LiveData
 import dev.passerby.domain.models.CoinHistoryModel
 import dev.passerby.domain.models.CoinModel
+import dev.passerby.domain.models.FavoriteModel
 
 interface CoinInfoRepository {
 
@@ -11,6 +12,6 @@ interface CoinInfoRepository {
 
     suspend fun loadCoinHistory(coinId: String, period: String): LiveData<CoinHistoryModel>?
 
-    suspend fun addCoinToFav(coinModel: CoinModel)
+    suspend fun addCoinToFav(favoriteModel: FavoriteModel)
     suspend fun removeCoinFromFav(coinId: String)
 }

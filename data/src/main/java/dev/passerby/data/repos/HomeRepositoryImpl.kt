@@ -9,12 +9,14 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import dev.passerby.data.database.AppDatabase
 import dev.passerby.data.mappers.CoinMapper
+import dev.passerby.data.mappers.FavoritesMapper
 import dev.passerby.data.models.db.CoinDbModel
 import dev.passerby.data.models.dto.info.CoinsListDto
 import dev.passerby.data.network.ApiFactory
 import dev.passerby.data.network.BaseResponse
 import dev.passerby.data.workers.RefreshHistoryWorker
 import dev.passerby.domain.models.CoinModel
+import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.repos.HomeRepository
 import java.util.Calendar
 
@@ -25,6 +27,7 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
     private val favoriteDao = db.favoriteDao()
     private val apiService = ApiFactory.apiService
     private val coinMapper = CoinMapper()
+    private val favoritesMapper = FavoritesMapper()
     private var coinsListResult: MutableLiveData<BaseResponse<CoinsListDto>> = MutableLiveData()
 
     private val monthNames = listOf(
@@ -66,9 +69,13 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
         return dateLiveData
     }
 
-    override fun getFavCoinsList(): LiveData<List<CoinModel>> {
+    override fun getFavCoinsList(): LiveData<List<FavoriteModel>> {
         val favoriteList = favoriteDao.getFavoritesList()
-        return getEntityList(favoriteList)
+        return favoriteList.map {list ->
+            list.map {
+                favoritesMapper.mapDbModelToEntity(it)
+            }
+        }
     }
 
     override fun getTopCoinsList(): LiveData<List<CoinModel>> {

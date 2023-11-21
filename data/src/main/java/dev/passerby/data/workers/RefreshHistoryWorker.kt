@@ -60,7 +60,7 @@ class RefreshHistoryWorker(
 
     companion object {
         const val TAG = "RefreshHistoryWorker"
-        private const val PERIOD = "1w"
+        private const val PERIOD = "24h"
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<RefreshHistoryWorker>().build()

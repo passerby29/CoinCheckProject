@@ -8,13 +8,18 @@ import androidx.lifecycle.map
 import dev.passerby.data.database.AppDatabase
 import dev.passerby.data.mappers.CoinHistoryMapper
 import dev.passerby.data.mappers.CoinMapper
+import dev.passerby.data.mappers.FavoritesMapper
 import dev.passerby.data.models.db.CoinHistoryDbModel
 import dev.passerby.data.models.dto.history.CoinHistoryDto
 import dev.passerby.data.network.ApiFactory
 import dev.passerby.data.network.BaseResponse
 import dev.passerby.domain.models.CoinHistoryModel
 import dev.passerby.domain.models.CoinModel
+import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.repos.CoinInfoRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CoinInfoRepositoryImpl(application: Application) : CoinInfoRepository {
 
@@ -25,6 +30,7 @@ class CoinInfoRepositoryImpl(application: Application) : CoinInfoRepository {
     private val apiService = ApiFactory.apiService
     private val coinMapper = CoinMapper()
     private val coinHistoryMapper = CoinHistoryMapper()
+    private val favoritesMapper = FavoritesMapper()
     private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
 
     override fun getCoinHistory(coinId: String): LiveData<CoinHistoryModel> {
@@ -67,8 +73,12 @@ class CoinInfoRepositoryImpl(application: Application) : CoinInfoRepository {
         return null
     }
 
-    override suspend fun addCoinToFav(coinModel: CoinModel) {
-        favoriteDao.insertFavorite(coinMapper.mapEntityToDbModel(coinModel))
+    override suspend fun addCoinToFav(favoriteModel: FavoriteModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (favoriteDao.getFavoritesCount() < 5) {
+                favoriteDao.insertFavorite(favoritesMapper.mapEntityToDbModel(favoriteModel))
+            }
+        }
     }
 
     override suspend fun removeCoinFromFav(coinId: String) {

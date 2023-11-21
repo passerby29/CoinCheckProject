@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.passerby.data.repos.CoinInfoRepositoryImpl
+import dev.passerby.domain.models.CoinModel
+import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.usecases.AddCoinToFavUseCase
 import dev.passerby.domain.usecases.RemoveCoinFromFavUseCase
 import dev.passerby.domain.usecases.get.GetCoinHistoryUseCase
@@ -31,8 +33,8 @@ class CoinInfoViewModel(
         loadCoinHistory(coinId, period)
     }
 
-    fun addCoinToFav() = viewModelScope.launch {
-        addCoinToFavUseCase(coinInfo.value!!)
+    fun addCoinToFav(favoriteModel: FavoriteModel) = viewModelScope.launch {
+        addCoinToFavUseCase(favoriteModel)
     }
 
     fun removeCoinFromFav() = viewModelScope.launch {
