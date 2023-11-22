@@ -9,13 +9,14 @@ import dev.passerby.cryptoxmlproject.callbacks.FavoritesDiffCallback
 import dev.passerby.cryptoxmlproject.databinding.ItemFavoriteCoinBinding
 import dev.passerby.cryptoxmlproject.viewholders.FavoritesViewHolder
 import dev.passerby.domain.models.CoinModel
+import dev.passerby.domain.models.FavoriteModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 class FavoritesAdapter(private val context: Context) :
-    ListAdapter<CoinModel, FavoritesViewHolder>(FavoritesDiffCallback()) {
+    ListAdapter<FavoriteModel, FavoritesViewHolder>(FavoritesDiffCallback()) {
 
-    var onFavItemCLickListener: ((CoinModel) -> Unit)? = null
+    var onFavItemCLickListener: ((FavoriteModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

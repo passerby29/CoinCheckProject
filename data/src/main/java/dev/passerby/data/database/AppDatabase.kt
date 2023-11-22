@@ -13,7 +13,7 @@ import dev.passerby.data.models.db.FavoriteDbModel
 @Database(
     entities = [CoinDbModel::class, FavoriteDbModel::class, CoinHistoryDbModel::class],
     exportSchema = false,
-    version = 1
+    version = 2
 )
 @TypeConverters(JsonConverters::class)
 abstract class AppDatabase : RoomDatabase() {

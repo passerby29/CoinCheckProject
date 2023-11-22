@@ -16,6 +16,9 @@ interface CoinDao {
     @Query("select * from coins")
     fun getCoinsList(): LiveData<List<CoinDbModel>>
 
+    @Query("select * from coins")
+    fun getCoinsListWorker(): List<CoinDbModel>
+
     @Query("select * from coins limit 5")
     fun getTopCoins(): LiveData<List<CoinDbModel>>
 
