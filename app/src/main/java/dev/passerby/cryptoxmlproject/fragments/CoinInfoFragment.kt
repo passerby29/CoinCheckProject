@@ -14,10 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.databinding.FragmentCoinInfoBinding
 import dev.passerby.cryptoxmlproject.factories.CoinInfoViewModelFactory
 import dev.passerby.cryptoxmlproject.viewmodels.CoinInfoViewModel
 import dev.passerby.domain.models.FavoriteModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 class CoinInfoFragment : Fragment() {
@@ -66,7 +70,15 @@ class CoinInfoFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
         binding.coinInfoFavButton.setOnClickListener {
-            viewModel.addCoinToFav(favoriteModel)
+            CoroutineScope(Dispatchers.Main).launch {
+                if (viewModel.isCoinAddedToFav()) {
+                    viewModel.removeCoinFromFav(favoriteModel.id)
+                    binding.coinInfoFavButton.setImageResource(R.drawable.ic_favorite_border)
+                } else {
+                    viewModel.addCoinToFav(favoriteModel)
+                    binding.coinInfoFavButton.setImageResource(R.drawable.ic_search)
+                }
+            }
         }
 
         val displayMetrics = requireContext().resources.displayMetrics

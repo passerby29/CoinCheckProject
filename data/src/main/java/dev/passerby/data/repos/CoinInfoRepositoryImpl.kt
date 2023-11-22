@@ -19,7 +19,9 @@ import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.repos.CoinInfoRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CoinInfoRepositoryImpl(application: Application) : CoinInfoRepository {
 
@@ -43,6 +45,15 @@ class CoinInfoRepositoryImpl(application: Application) : CoinInfoRepository {
     override fun getCoinInfo(coinId: String): LiveData<CoinModel> {
         val coinInfo = coinDao.getCoinInfo(coinId)
         return coinInfo.map { coinMapper.mapDbModelToEntity(it) }
+    }
+
+    override suspend fun isCoinAddedToFav(coinId: String): Boolean {
+        val coinsList = coroutineScope {
+            withContext(Dispatchers.IO) {
+                favoriteDao.isFavoriteAdded(coinId)
+            }
+        }
+        return coinsList.isNotEmpty()
     }
 
     override suspend fun loadCoinHistory(

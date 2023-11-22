@@ -14,4 +14,5 @@ interface CoinInfoRepository {
 
     suspend fun addCoinToFav(favoriteModel: FavoriteModel)
     suspend fun removeCoinFromFav(coinId: String)
+    suspend fun isCoinAddedToFav(coinId: String): Boolean
 }

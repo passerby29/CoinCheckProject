@@ -17,6 +17,10 @@ interface FavoriteDao {
     @Query("select count( * ) from favorites")
     fun getFavoritesCount(): Int
 
+    @Query("select * from favorites where id = :coinId")
+    fun isFavoriteAdded(coinId: String): List<FavoriteDbModel>
+
+
     @Query("delete from favorites where id = :coinId")
     suspend fun deleteFavorite(coinId: String)
 
