@@ -41,6 +41,7 @@ class CoinInfoFragment : Fragment() {
 
     private val prices = mutableListOf<Pair<String, Float>>()
     private var chartList = listOf<Double>()
+    private var collapsedChartList = listOf<Double>()
     private var startX = 0f
     private var startY = 0f
     private var delay = 1000L
@@ -81,6 +82,17 @@ class CoinInfoFragment : Fragment() {
             }
         }
 
+        for (i in 0 until binding.materialButtonToggleGroup.childCount) {
+            binding.materialButtonToggleGroup.getChildAt(i).setOnClickListener {
+                CoroutineScope(Dispatchers.Main).launch {
+                    viewModel.loadCoinHistory(PERIOD_LIST[i])?.observe(viewLifecycleOwner){
+                        chartList = it.prices
+                        initChart(chartList, true)
+                    }
+                }
+            }
+        }
+
         val displayMetrics = requireContext().resources.displayMetrics
         val dpHeight = displayMetrics.heightPixels / displayMetrics.density
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
@@ -114,7 +126,7 @@ class CoinInfoFragment : Fragment() {
             binding.coinInfoCollapsedChartView.visibility = View.INVISIBLE
             slideView(binding.collapsedContainer, dpHeight * 0.9f, dpHeight * 0.5f)
             slideView(binding.coinInfoCollapsedChartView, dpHeight * 0.75f, 104f)
-            initChart(chartList, false)
+            initChart(collapsedChartList, false)
 
             binding.collapsedLinearLayout.animate()
                 .x(startX)
@@ -155,7 +167,7 @@ class CoinInfoFragment : Fragment() {
         }
         viewModel.coinHistory.observe(viewLifecycleOwner) { coinHistory ->
             initChart(coinHistory.prices, false)
-            chartList = coinHistory.prices
+            collapsedChartList = coinHistory.prices
             if (coinHistory.prices.isNotEmpty()) {
                 binding.coinInfoMaxTextView.text = coinHistory.prices.max().toString()
                 binding.coinInfoMinTextView.text = coinHistory.prices.min().toString()
@@ -204,5 +216,17 @@ class CoinInfoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        private val PERIOD_LIST = listOf(
+            "24h",
+            "1w",
+            "1m",
+            "3m",
+            "6m",
+            "1y",
+            "all",
+        )
     }
 }

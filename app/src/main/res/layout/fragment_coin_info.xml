@@ -198,15 +198,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:selectionRequired="true"
-            app:checkedButton="@id/buttonOneDay"
+            app:checkedButton="@id/coinInfoOneDayButton"
             app:singleSelection="true">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonOneDay"
+                android:id="@+id/coinInfoOneDayButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -217,11 +218,13 @@
                 android:insetBottom="0dp"
                 android:padding="0dp"
                 android:text="1D"
+                android:textAllCaps="true"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/coinInfoOneWeekButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -231,12 +234,14 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:text="1w"
+                android:textAllCaps="true"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/coinInfoOneMonthButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -246,12 +251,14 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:text="1m"
+                android:textAllCaps="true"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/coinInfoThreeMonthButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -261,12 +268,14 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:text="3m"
+                android:textAllCaps="true"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/coinInfoSixMonthButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -276,12 +285,14 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:text="6m"
+                android:textAllCaps="true"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/coinInfoOneYearButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -291,12 +302,14 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:text="1Y"
+                android:textAllCaps="true"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/coinInfoAllButton"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
@@ -306,7 +319,8 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:textAllCaps="true"
+                android:text="all"
                 android:textSize="12sp"
                 style="?attr/materialButtonOutlinedStyle"
                 app:cornerRadius="0dp" />
