@@ -33,7 +33,7 @@ class CoinInfoFragment : Fragment() {
     private val args by navArgs<CoinInfoFragmentArgs>()
 
     private val viewModelFactory by lazy {
-        CoinInfoViewModelFactory(requireActivity().application, args.rank, args.coinId)
+        CoinInfoViewModelFactory(requireActivity().application, args.coinId)
     }
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[CoinInfoViewModel::class.java]
@@ -95,7 +95,6 @@ class CoinInfoFragment : Fragment() {
 
         val displayMetrics = requireContext().resources.displayMetrics
         val dpHeight = displayMetrics.heightPixels / displayMetrics.density
-        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
 
         binding.coinInfoShowAllButton.setOnClickListener {
             binding.materialButtonToggleGroup.visibility = View.VISIBLE

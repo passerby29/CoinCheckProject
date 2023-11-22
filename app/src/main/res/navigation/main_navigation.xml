@@ -26,9 +26,6 @@
         android:label="fragment_coin_info"
         tools:layout="@layout/fragment_coin_info">
         <argument
-            android:name="rank"
-            app:argType="integer" />
-        <argument
             android:name="coinId"
             app:argType="string" />
     </fragment>

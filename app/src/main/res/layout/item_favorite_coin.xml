@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardBackgroundColor="#c9c9c9">
+    app:cardBackgroundColor="@color/card_background_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +22,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_favorite_border"
-                app:tint="@color/black" />
+                android:src="@drawable/ic_favorite_filled" />
         </LinearLayout>
 
         <LinearLayout
@@ -36,6 +35,8 @@
                 android:id="@+id/favoritePriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_medium"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 tools:text="\u002450,669.33" />
 
@@ -43,6 +44,8 @@
                 android:id="@+id/favoriteChangeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_regular"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 tools:text="\u002b20%" />
         </LinearLayout>
@@ -69,6 +72,8 @@
                     android:id="@+id/favoriteNameTexView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_regular"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="Bitcoin" />
@@ -77,6 +82,8 @@
                     android:id="@+id/favoriteSymbolTexView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_extra_light"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     tools:text="BTC" />
             </LinearLayout>
@@ -84,8 +91,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/favoriteMoreButton"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="More"
+                android:textColor="@color/white"
+                android:fontFamily="@font/outfit_bold"
+                android:textSize="16sp"
+                app:backgroundTint="@color/button_background"
                 app:cornerRadius="4dp" />
         </LinearLayout>
     </LinearLayout>

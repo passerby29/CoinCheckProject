@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fav_placeholder">There is nothing in favorites yet!\nClick to see a list of all currencies.</string>
     <string name="coins_list_title">Coins List</string>
+
+    <string name="price_placeholder">\u0024%s</string>
+    <string name="price_change_placeholder">\u0024%1s \u0028%2s\u0029</string>
 </resources>

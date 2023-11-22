@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -44,6 +46,7 @@ class HomeFragment : Fragment() {
     private lateinit var coinPredictionsAdapter: CoinPredictionsAdapter
     private lateinit var favoritesAdapter: FavoritesAdapter
     private var filterString = ""
+    private var isSearchOpen = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -75,15 +78,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSearch() {
-        var isSearchOpen = false
         binding.homeSearchButton.setOnClickListener {
+            val displayMetrics = requireContext().resources.displayMetrics
+            val dpWidth = displayMetrics.widthPixels / displayMetrics.density
             isSearchOpen = if (isSearchOpen) {
-                slideView(binding.homeDateTextView, 1, 264)
-                slideView(binding.homeSearchEditText, 272, 1)
+                slideView(binding.homeDateTextView, 1f, dpWidth * 0.65f)
+                slideView(binding.homeSearchEditText, dpWidth * 0.65f, 1f)
                 false
             } else {
-                slideView(binding.homeDateTextView, 264, 1)
-                slideView(binding.homeSearchEditText, 1, 272)
+                slideView(binding.homeDateTextView, dpWidth * 0.65f, 1f)
+                slideView(binding.homeSearchEditText, 1f, dpWidth * 0.65f)
                 true
             }
             binding.homeSearchPredictionsContainer.visibility = if (isSearchOpen){
@@ -197,7 +201,7 @@ class HomeFragment : Fragment() {
     private fun setOnCoinClickListener() {
         coinsAdapter.onCoinItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
             )
         }
     }
@@ -205,7 +209,7 @@ class HomeFragment : Fragment() {
     private fun setOnPredictionClickListener() {
         coinPredictionsAdapter.onPredictionItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
             )
         }
     }
@@ -213,16 +217,16 @@ class HomeFragment : Fragment() {
     private fun setOnFavoriteClickListener() {
         favoritesAdapter.onFavItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
             )
         }
     }
 
-    private fun slideView(view: View, currentWidth: Int, newWidth: Int) {
-        val slideAnimator = ValueAnimator.ofInt(currentWidth, newWidth).setDuration(500)
+    private fun slideView(view: View, currentWidth: Float, newWidth: Float) {
+        val slideAnimator = ValueAnimator.ofFloat(currentWidth, newWidth).setDuration(500)
 
         slideAnimator.addUpdateListener { animation1: ValueAnimator ->
-            val value = animation1.animatedValue as Int
+            val value = animation1.animatedValue as Float
             view.layoutParams.width =
                 (value * Resources.getSystem().displayMetrics.density).roundToInt()
             view.requestLayout()
@@ -230,6 +234,20 @@ class HomeFragment : Fragment() {
         val animationSet = AnimatorSet()
         animationSet.interpolator = AccelerateDecelerateInterpolator()
         animationSet.play(slideAnimator)
+        animationSet.doOnStart {
+            if (isSearchOpen){
+                binding.homeDateTextView.visibility = View.VISIBLE
+            } else {
+                binding.homeSearchEditText.visibility = View.VISIBLE
+            }
+        }
+        animationSet.doOnEnd {
+            if (isSearchOpen){
+                binding.homeDateTextView.visibility = View.INVISIBLE
+            } else {
+                binding.homeSearchEditText.visibility = View.INVISIBLE
+            }
+        }
         animationSet.start()
     }
 

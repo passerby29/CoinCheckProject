@@ -19,7 +19,7 @@ interface CoinDao {
     @Query("select * from coins")
     fun getCoinsListWorker(): List<CoinDbModel>
 
-    @Query("select * from coins limit 5")
+    @Query("select * from coins limit 4")
     fun getTopCoins(): LiveData<List<CoinDbModel>>
 
     @Query("select * from coins where id like :filter order by rank")
