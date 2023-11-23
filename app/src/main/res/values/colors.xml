@@ -6,5 +6,8 @@
     <color name="date_background">#7278FF</color>
     <color name="card_background_color">#35354E</color>
     <color name="button_background">#454CEE</color>
+    <color name="light_button_background">#7278FF</color>
     <color name="unselected_dot_color">#E0E0E0</color>
+    <color name="minus_color">#FF2A2A</color>
+    <color name="plus_color">#00D77D</color>
 </resources>

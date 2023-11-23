@@ -17,6 +17,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
@@ -82,20 +83,26 @@ class HomeFragment : Fragment() {
             val displayMetrics = requireContext().resources.displayMetrics
             val dpWidth = displayMetrics.widthPixels / displayMetrics.density
             isSearchOpen = if (isSearchOpen) {
-                slideView(binding.homeDateTextView, 1f, dpWidth * 0.65f)
-                slideView(binding.homeSearchEditText, dpWidth * 0.65f, 1f)
+                lifecycleScope.launch {
+                    slideView(binding.homeDateTextView, 1f, dpWidth * 0.65f)
+                    delay(50)
+                    slideView(binding.homeSearchEditText, dpWidth * 0.65f, 10f)
+                }
                 false
             } else {
-                slideView(binding.homeDateTextView, dpWidth * 0.65f, 1f)
-                slideView(binding.homeSearchEditText, 1f, dpWidth * 0.65f)
+                lifecycleScope.launch {
+                    slideView(binding.homeSearchEditText, 1f, dpWidth * 0.65f)
+                    delay(50)
+                    slideView(binding.homeDateTextView, dpWidth * 0.65f, 10f)
+                }
                 true
             }
-            binding.homeSearchPredictionsContainer.visibility = if (isSearchOpen){
+            binding.homeSearchPredictionsContainer.visibility = if (isSearchOpen) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-            if (!isSearchOpen){
+            if (!isSearchOpen) {
                 hideSoftKeyboard(requireActivity(), binding.homeSearchEditText)
             } else {
                 openSoftKeyboard(requireActivity(), binding.homeSearchEditText)
@@ -235,14 +242,14 @@ class HomeFragment : Fragment() {
         animationSet.interpolator = AccelerateDecelerateInterpolator()
         animationSet.play(slideAnimator)
         animationSet.doOnStart {
-            if (isSearchOpen){
+            if (isSearchOpen) {
                 binding.homeDateTextView.visibility = View.VISIBLE
             } else {
                 binding.homeSearchEditText.visibility = View.VISIBLE
             }
         }
         animationSet.doOnEnd {
-            if (isSearchOpen){
+            if (isSearchOpen) {
                 binding.homeDateTextView.visibility = View.INVISIBLE
             } else {
                 binding.homeSearchEditText.visibility = View.INVISIBLE

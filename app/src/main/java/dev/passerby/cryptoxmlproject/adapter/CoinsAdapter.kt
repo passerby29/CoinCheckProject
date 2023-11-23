@@ -3,8 +3,10 @@ package dev.passerby.cryptoxmlproject.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
+import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.callbacks.CoinDiffCallback
 import dev.passerby.cryptoxmlproject.databinding.ItemCoinBinding
 import dev.passerby.cryptoxmlproject.viewholders.CoinViewHolder
@@ -29,7 +31,22 @@ class CoinsAdapter(private val context: Context) :
             coinNameTextView.text = item.name
             coinSymbolTextView.text = item.symbol
             coinPriceTextView.text = item.price.toString()
-            coinChangeTextView.text = item.priceChange1h.toString()
+            coinChangeTextView.apply {
+                text = String.format(
+                    context.getString(R.string.price_change_placeholder_coin),
+                    item.priceChange1h
+                )
+                setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        if (item.priceChange1h < 0) {
+                            R.color.minus_color
+                        } else {
+                            R.color.plus_color
+                        }
+                    )
+                )
+            }
             this.root.setOnClickListener { onCoinItemCLickListener?.invoke(item) }
         }
     }

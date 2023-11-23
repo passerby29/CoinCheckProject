@@ -3,6 +3,7 @@ package dev.passerby.cryptoxmlproject.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import dev.passerby.cryptoxmlproject.R
@@ -12,6 +13,7 @@ import dev.passerby.cryptoxmlproject.viewholders.FavoritesViewHolder
 import dev.passerby.domain.models.FavoriteModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlin.math.absoluteValue
 
 class FavoritesAdapter(private val context: Context) :
     ListAdapter<FavoriteModel, FavoritesViewHolder>(FavoritesDiffCallback()) {
@@ -35,11 +37,29 @@ class FavoritesAdapter(private val context: Context) :
             Glide.with(context).load(item.icon).into(favoriteLogoImageView)
             favoriteNameTexView.text = item.name
             favoriteSymbolTexView.text = item.symbol
-            favoriteChangeTextView.text = String.format(
-                context.getString(R.string.price_change_placeholder),
-                priceChange,
-                item.priceChange1h
-            )
+            favoriteChangeTextView.apply {
+                text = String.format(
+                    context.getString(
+                        if (item.priceChange1h < 0) {
+                            R.string.price_change_placeholder_fav_minus
+                        } else {
+                            R.string.price_change_placeholder_fav_plus
+                        }
+                    ),
+                    priceChange,
+                    item.priceChange1h.absoluteValue
+                )
+                setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        if (item.priceChange1h < 0) {
+                            R.color.minus_color
+                        } else {
+                            R.color.plus_color
+                        }
+                    )
+                )
+            }
             favoriteMoreButton.setOnClickListener { onFavItemCLickListener?.invoke(item) }
         }
     }
@@ -53,7 +73,7 @@ class FavoritesAdapter(private val context: Context) :
             }
         )
         decimalFormat.roundingMode = RoundingMode.DOWN
-        return decimalFormat.format(double)
+        return decimalFormat.format(double.absoluteValue)
     }
 
     companion object {

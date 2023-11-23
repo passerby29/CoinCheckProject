@@ -7,18 +7,11 @@
     android:background="@color/main_background"
     tools:context=".fragments.HomeFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
-
     <TextView
         android:id="@+id/homeDateTextView"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/item_date_background"
         android:fontFamily="@font/outfit_medium"
@@ -35,7 +28,7 @@
 
     <EditText
         android:id="@+id/homeSearchEditText"
-        android:layout_width="1dp"
+        android:layout_width="10dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/item_search_background"
@@ -198,8 +191,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -208,6 +200,7 @@
                 android:layout_marginVertical="16dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="@font/outfit_bold"
                 android:includeFontPadding="false"
                 android:text="@string/coins_list_title"
@@ -216,9 +209,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/homeCoinsRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:overScrollMode="never"
                 tools:itemCount="4"
+                android:layout_weight="1"
                 tools:listitem="@layout/item_coin" />
 
             <com.google.android.material.button.MaterialButton
@@ -226,6 +220,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="Show all"
+                android:fontFamily="@font/outfit_bold"
+                android:textColor="@color/white"
+                android:paddingHorizontal="48dp"
+                android:paddingVertical="8dp"
+                android:textSize="16sp"
+                app:backgroundTint="@color/light_button_background"
                 android:layout_marginVertical="16dp"
                 app:cornerRadius="4dp" />
         </LinearLayout>

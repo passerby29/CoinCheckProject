@@ -6,5 +6,7 @@
     <string name="coins_list_title">Coins List</string>
 
     <string name="price_placeholder">\u0024%s</string>
-    <string name="price_change_placeholder">\u0024%1s \u0028%2s\u0029</string>
+    <string name="price_change_placeholder_fav_plus">+\u0024%1s \u0028%2s\%%\u0029</string>
+    <string name="price_change_placeholder_fav_minus">-\u0024%1s \u0028%2s\%%\u0029</string>
+    <string name="price_change_placeholder_coin">%s\%%</string>
 </resources>
