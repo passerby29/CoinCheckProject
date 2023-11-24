@@ -10,4 +10,5 @@
     <color name="unselected_dot_color">#E0E0E0</color>
     <color name="minus_color">#FF2A2A</color>
     <color name="plus_color">#00D77D</color>
+    <color name="search_background">#242F3D</color>
 </resources>

@@ -7,11 +7,31 @@
     android:background="@color/main_background"
     tools:context=".fragments.HomeFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
     <TextView
         android:id="@+id/homeDateTextView"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/item_date_background"
         android:fontFamily="@font/outfit_medium"
@@ -21,7 +41,7 @@
         android:paddingVertical="4dp"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.65"
         tools:text="Wednesday, 16th September" />
@@ -30,7 +50,6 @@
         android:id="@+id/homeSearchEditText"
         android:layout_width="10dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
         android:background="@drawable/item_search_background"
         android:focusable="true"
         android:fontFamily="@font/outfit_regular"
@@ -38,33 +57,40 @@
         android:importantForAutofill="no"
         android:inputType="textCapWords"
         android:paddingHorizontal="8dp"
+        android:elevation="4dp"
         android:textColor="@color/white"
         android:textColorHint="#33FFFFFF"
         android:textCursorDrawable="@drawable/item_cursor_background"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/homeDateTextView"
-        app:layout_constraintEnd_toStartOf="@+id/homeSearchButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/homeDateTextView" />
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/homeSearchPredictionsContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:orientation="vertical"
+        style="@style/CustomCardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="224dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/homeSearchEditText">
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="1dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/homeSearchEditText"
+        app:strokeWidth="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homeSearchPredictionsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never" />
-
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:background="@color/search_background"
+            android:overScrollMode="never"
+            android:paddingHorizontal="16dp"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_coin_prediction" />
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/homeSettingsButton"
@@ -90,35 +116,44 @@
         app:layout_constraintEnd_toStartOf="@+id/homeSettingsButton"
         app:layout_constraintTop_toTopOf="@+id/homeDateTextView" />
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/homeFavoritesPlaceholderContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="24dp"
-        android:background="#c9c9c9"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_marginVertical="8dp"
         android:visibility="gone"
+        app:cardBackgroundColor="@color/card_background_color"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintDimensionRatio="H, 3:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeDateTextView">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/fav_placeholder"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="center"
+                android:text="@string/fav_placeholder"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView"
@@ -137,10 +172,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="8dp"
-        app:cardElevation="0dp"
-        app:cardCornerRadius="12dp"
+        android:layout_marginVertical="8dp"
         app:cardBackgroundColor="@color/card_background_color"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintDimensionRatio="H, 3:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/homeFavoritesContainer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -173,7 +209,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <LinearLayout
         android:id="@+id/homeBottomSheetContainer"
@@ -197,22 +233,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginVertical="16dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="16dp"
                 android:fontFamily="@font/outfit_bold"
+                android:gravity="center_vertical"
                 android:includeFontPadding="false"
                 android:text="@string/coins_list_title"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/homeCoinsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_weight="1"
                 android:overScrollMode="never"
                 tools:itemCount="4"
-                android:layout_weight="1"
                 tools:listitem="@layout/item_coin" />
 
             <com.google.android.material.button.MaterialButton
@@ -220,14 +256,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Show all"
+                android:layout_marginVertical="16dp"
                 android:fontFamily="@font/outfit_bold"
-                android:textColor="@color/white"
                 android:paddingHorizontal="48dp"
                 android:paddingVertical="8dp"
+                android:text="Show all"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/light_button_background"
-                android:layout_marginVertical="16dp"
                 app:cornerRadius="4dp" />
         </LinearLayout>
     </LinearLayout>

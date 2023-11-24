@@ -79,6 +79,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSearch() {
+        isSearchOpen = false
         binding.homeSearchButton.setOnClickListener {
             val displayMetrics = requireContext().resources.displayMetrics
             val dpWidth = displayMetrics.widthPixels / displayMetrics.density

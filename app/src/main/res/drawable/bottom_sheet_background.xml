@@ -3,12 +3,12 @@
     <corners
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
-        android:topLeftRadius="32dp"
-        android:topRightRadius="32dp" />
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp" />
     <padding
         android:bottom="0dip"
         android:left="0dip"
         android:right="0dip"
         android:top="0dip" />
-    <solid android:color="#ffffff" />
+    <solid android:color="@color/search_background" />
 </shape>
