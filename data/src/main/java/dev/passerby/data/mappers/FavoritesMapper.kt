@@ -1,6 +1,7 @@
 package dev.passerby.data.mappers
 
 import dev.passerby.data.models.db.FavoriteDbModel
+import dev.passerby.data.roundDouble
 import dev.passerby.domain.models.FavoriteModel
 
 class FavoritesMapper {
@@ -19,8 +20,8 @@ class FavoritesMapper {
         icon = entity.icon,
         id = entity.id,
         name = entity.name,
-        price = entity.price,
-        priceChange1h = entity.priceChange1h,
+        price = roundDouble(entity.price),
+        priceChange1h = roundDouble(entity.priceChange1h),
         rank = entity.rank,
         symbol = entity.symbol
     )

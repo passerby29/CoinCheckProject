@@ -13,6 +13,9 @@ interface CoinDao {
     @Query("select * from coins where id = :coinId")
     fun getCoinInfo(coinId: String): LiveData<CoinDbModel>
 
+    @Query("select * from coins where id = :coinId")
+    fun getCoinInfoNotLiveData(coinId: String): CoinDbModel
+
     @Query("select * from coins")
     fun getCoinsList(): LiveData<List<CoinDbModel>>
 

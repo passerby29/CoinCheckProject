@@ -26,6 +26,9 @@ import dev.passerby.domain.models.FavoriteModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -177,7 +180,7 @@ class CoinInfoFragment : Fragment() {
                 coin.symbol
             )
 
-            val priceChange = coin.price / 100 * coin.priceChange1h
+            val priceChange = roundDouble(coin.price / 100 * coin.priceChange1h)
             with(binding) {
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoLogoImageView)
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoCollapsedLogoImageView)
@@ -279,6 +282,19 @@ class CoinInfoFragment : Fragment() {
         ).setDuration(delay).start()
     }
 
+    fun roundDouble(double: Double): Double {
+        val locale = Locale("en", "UK")
+        val pattern = if (double >= 10) {
+            DECIMAL_FORMAT_PATTERN_TWO
+        } else {
+            DECIMAL_FORMAT_PATTERN_FOUR
+        }
+        val decimalFormat = NumberFormat.getNumberInstance(locale) as DecimalFormat
+        decimalFormat.applyPattern(pattern)
+
+        return decimalFormat.format(double).toDouble()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -294,5 +310,8 @@ class CoinInfoFragment : Fragment() {
             "1y",
             "all",
         )
+
+        private const val DECIMAL_FORMAT_PATTERN_FOUR = "###.####"
+        private const val DECIMAL_FORMAT_PATTERN_TWO = "###.##"
     }
 }

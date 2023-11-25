@@ -18,6 +18,9 @@ import dev.passerby.data.workers.RefreshHistoryWorker
 import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.repos.HomeRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class HomeRepositoryImpl(private val application: Application) : HomeRepository {
@@ -71,7 +74,7 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
 
     override fun getFavCoinsList(): LiveData<List<FavoriteModel>> {
         val favoriteList = favoriteDao.getFavoritesList()
-        return favoriteList.map {list ->
+        return favoriteList.map { list ->
             list.map {
                 favoritesMapper.mapDbModelToEntity(it)
             }
@@ -110,6 +113,21 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
         } catch (ex: Exception) {
             Log.d(TAG, "loadCoinsCatch: $ex")
             coinsListResult.value = BaseResponse.Error(ex.message)
+        }
+    }
+
+    override fun updateFavorites() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val favoriteList = favoriteDao.getFavoritesListNotLiveData()
+            favoriteList.forEach {
+                val coinInfo = coinDao.getCoinInfoNotLiveData(it.id)
+                favoriteDao.insertFavorite(
+                    it.copy(
+                        price = coinInfo.price,
+                        priceChange1h = coinInfo.priceChange1h
+                    )
+                )
+            }
         }
     }
 
