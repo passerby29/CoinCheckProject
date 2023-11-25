@@ -14,5 +14,5 @@ interface CoinHistoryDao {
     fun getCoinHistory(coinId: String): LiveData<CoinHistoryDbModel?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCoinHistory(coinHistory: CoinHistoryDbModel)
+    suspend fun insertCoinHistory(coinHistory: List<CoinHistoryDbModel>)
 }

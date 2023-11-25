@@ -35,7 +35,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             loadCoinsListUseCase()
-//            loadCoinsHistoryUseCase()
+            loadCoinsHistoryUseCase()
         }
         updateFavoritesUseCase()
     }

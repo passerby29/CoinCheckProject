@@ -5,16 +5,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import androidx.work.ExistingWorkPolicy
-import androidx.work.WorkManager
 import dev.passerby.data.database.AppDatabase
+import dev.passerby.data.mappers.CoinHistoryMapper
 import dev.passerby.data.mappers.CoinMapper
 import dev.passerby.data.mappers.FavoritesMapper
 import dev.passerby.data.models.db.CoinDbModel
+import dev.passerby.data.models.db.CoinHistoryDbModel
+import dev.passerby.data.models.dto.history.CoinHistoryDto
 import dev.passerby.data.models.dto.info.CoinsListDto
 import dev.passerby.data.network.ApiFactory
 import dev.passerby.data.network.BaseResponse
-import dev.passerby.data.workers.RefreshHistoryWorker
 import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.repos.HomeRepository
@@ -23,15 +23,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class HomeRepositoryImpl(private val application: Application) : HomeRepository {
+class HomeRepositoryImpl(application: Application) : HomeRepository {
 
     private val db = AppDatabase.getInstance(application)
     private val coinDao = db.coinDao()
     private val favoriteDao = db.favoriteDao()
+    private val coinHistoryDao = db.coinHistoryDao()
     private val apiService = ApiFactory.apiService
     private val coinMapper = CoinMapper()
     private val favoritesMapper = FavoritesMapper()
+    private val coinHistoryMapper = CoinHistoryMapper()
+
     private var coinsListResult: MutableLiveData<BaseResponse<CoinsListDto>> = MutableLiveData()
+    private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
 
     private val monthNames = listOf(
         "January",
@@ -87,12 +91,33 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
     }
 
     override suspend fun loadCoinsHistory() {
-        val workManager = WorkManager.getInstance(application)
-        workManager.enqueueUniqueWork(
-            RefreshHistoryWorker.TAG,
-            ExistingWorkPolicy.REPLACE,
-            RefreshHistoryWorker.makeRequest()
-        )
+        CoroutineScope(Dispatchers.IO).launch {
+            coinHistoryResult.postValue(BaseResponse.Loading())
+            try {
+                val coinsList = coinDao.getCoinsListWorker()
+                val coinHistoryList = mutableListOf<CoinHistoryDbModel>()
+
+                coinsList.forEach { item ->
+                    val response = apiService.loadCoinHistory(item.id, PERIOD)
+                    if (response.code() == 200) {
+                        coinHistoryResult.postValue(BaseResponse.Success(response.body()))
+                        coinHistoryList.add(
+                            coinHistoryMapper.mapDtoToDbModel(
+                                item.rank, item.id, response.body()!!
+                            )
+                        )
+                        Log.d(TAG, "loadCoinsHistoryTry: ${item.name} ${response.body()?.get(0)}")
+                    } else {
+                        coinHistoryResult.postValue(BaseResponse.Error(response.message()))
+                        Log.d(TAG, "loadCoinsHistoryElse: ${response.message()}")
+                    }
+                }
+                coinHistoryDao.insertCoinHistory(coinHistoryList.toList())
+            } catch (ex: Exception) {
+                Log.d(TAG, "loadCoinsHistoryCatch: $ex")
+                coinHistoryResult.postValue(BaseResponse.Error(ex.message))
+            }
+        }
     }
 
     override suspend fun loadCoinsList() {
@@ -145,6 +170,7 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
     }
 
     companion object {
+        private const val PERIOD = "24h"
         private const val TAG = "HomeRepositoryImpl"
     }
 }
