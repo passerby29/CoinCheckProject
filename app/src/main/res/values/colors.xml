@@ -11,4 +11,5 @@
     <color name="minus_color">#FF2A2A</color>
     <color name="plus_color">#00D77D</color>
     <color name="search_background">#242F3D</color>
+    <color name="button_background_checked">#272A85</color>
 </resources>

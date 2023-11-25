@@ -30,7 +30,7 @@ class CoinsAdapter(private val context: Context) :
             Glide.with(context).load(item.icon).into(coinLogoImageView)
             coinNameTextView.text = item.name
             coinSymbolTextView.text = item.symbol
-            coinPriceTextView.text = item.price.toString()
+            coinPriceTextView.text = String.format(context.getString(R.string.price_placeholder), item.price)
             coinChangeTextView.apply {
                 text = String.format(
                     context.getString(R.string.price_change_placeholder_coin),

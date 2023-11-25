@@ -1,15 +1,19 @@
 package dev.passerby.cryptoxmlproject.fragments
 
 import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.TextView
 import androidx.core.animation.doOnEnd
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -22,7 +26,9 @@ import dev.passerby.domain.models.FavoriteModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
+
 
 class CoinInfoFragment : Fragment() {
 
@@ -45,11 +51,12 @@ class CoinInfoFragment : Fragment() {
     private var startX = 0f
     private var startY = 0f
     private var delay = 1000L
+    private var dpHeight = 0f
+    private lateinit var displayMetrics: DisplayMetrics
     private lateinit var favoriteModel: FavoriteModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCoinInfoBinding.inflate(inflater, container, false)
         return binding.root
@@ -58,12 +65,10 @@ class CoinInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayMetrics = requireContext().resources.displayMetrics
+        dpHeight = displayMetrics.heightPixels / displayMetrics.density
         observeViewModel()
         initButtons()
-        binding.coinInfoCollapsedChartView.gradientFillColors = intArrayOf(
-            Color.parseColor("#454CEE"),
-            Color.TRANSPARENT
-        )
     }
 
     private fun initButtons() {
@@ -85,7 +90,7 @@ class CoinInfoFragment : Fragment() {
         for (i in 0 until binding.materialButtonToggleGroup.childCount) {
             binding.materialButtonToggleGroup.getChildAt(i).setOnClickListener {
                 CoroutineScope(Dispatchers.Main).launch {
-                    viewModel.loadCoinHistory(PERIOD_LIST[i])?.observe(viewLifecycleOwner){
+                    viewModel.loadCoinHistory(PERIOD_LIST[i])?.observe(viewLifecycleOwner) {
                         chartList = it.prices
                         initChart(chartList, true)
                     }
@@ -93,54 +98,71 @@ class CoinInfoFragment : Fragment() {
             }
         }
 
-        val displayMetrics = requireContext().resources.displayMetrics
-        val dpHeight = displayMetrics.heightPixels / displayMetrics.density
-
         binding.coinInfoShowAllButton.setOnClickListener {
-            binding.materialButtonToggleGroup.visibility = View.VISIBLE
-            binding.coinInfoCollapsedChartView.visibility = View.INVISIBLE
-            val currentWidth = dpHeight * 0.5f
-            val newWidth = dpHeight * 0.9f
-            slideView(binding.collapsedContainer, currentWidth, newWidth)
-            binding.collapsedLinearLayout.animate()
-                .x(24f)
-                .y(24f)
-                .withStartAction {
-                    binding.coinInfoPriceTextView.textSize = 16f
-                }.withEndAction {
-                    binding.coinInfoCollapsedLogoContainer.visibility = View.VISIBLE
-                }.setDuration(delay).start()
-            slideView(binding.coinInfoCollapsedChartView, 104f, dpHeight * 0.75f)
-            initChart(chartList, true)
-            binding.coinInfoPriceChangeContainer.visibility = View.GONE
-            startX =
-                binding.collapsedContainer.x + binding.collapsedContainer.width / 2 - binding.collapsedLinearLayout.width / 2
-            startY = 24f
-            binding.coinInfoShowAllButton.visibility = View.GONE
-            binding.coinInfoCollapseButton.visibility = View.VISIBLE
+            expandChart()
         }
 
         binding.coinInfoCollapseButton.setOnClickListener {
-            binding.materialButtonToggleGroup.visibility = View.GONE
-            binding.coinInfoCollapsedChartView.visibility = View.INVISIBLE
-            slideView(binding.collapsedContainer, dpHeight * 0.9f, dpHeight * 0.5f)
-            slideView(binding.coinInfoCollapsedChartView, dpHeight * 0.75f, 104f)
-            initChart(collapsedChartList, false)
-
-            binding.collapsedLinearLayout.animate()
-                .x(startX)
-                .y(startY).withStartAction {
-                    binding.coinInfoPriceTextView.textSize = 40f
-                    binding.coinInfoCollapsedLogoContainer.visibility = View.GONE
-                }.setDuration(delay).start()
-            binding.coinInfoPriceChangeContainer.visibility = View.VISIBLE
-            binding.coinInfoShowAllButton.visibility = View.VISIBLE
-            binding.coinInfoCollapseButton.visibility = View.GONE
+            collapseChart()
         }
     }
 
     private fun expandChart() {
+        with(binding) {
+            materialButtonToggleGroup.visibility = View.VISIBLE
+            coinInfoCollapsedChartView.visibility = View.INVISIBLE
+            val currentWidth = dpHeight * 0.5f
+            val newWidth = dpHeight * 0.9f
 
+            slideView(collapsedContainer, currentWidth, newWidth)
+            slideView(coinInfoCollapsedChartView, 104f, dpHeight * 0.75f)
+
+            collapsedLinearLayout.animate()
+                .x(32f)
+                .y(32f)
+                .withStartAction {
+                    startTextSizeAnimation(coinInfoPriceTextView, 36f, 16f)
+                    startTextSizeAnimation(coinInfoChangeTextView, 16f, 12f)
+                    coinInfoCollapsedLogoContainer.visibility = View.VISIBLE
+                }.setDuration(delay).start()
+
+
+            initChart(chartList, true)
+
+            startX =
+                collapsedContainer.x + collapsedContainer.width / 2 - collapsedLinearLayout.width / 2
+            startY = 32f
+
+            coinInfoPriceChangeContainer.visibility = View.GONE
+            coinInfoShowAllButton.visibility = View.GONE
+            coinInfoCollapseButton.visibility = View.VISIBLE
+        }
+    }
+
+    private fun collapseChart() {
+        with(binding) {
+            materialButtonToggleGroup.visibility = View.GONE
+            coinInfoCollapsedChartView.visibility = View.INVISIBLE
+
+            val currentWidth = dpHeight * 0.9f
+            val newWidth = dpHeight * 0.5f
+
+            slideView(collapsedContainer, currentWidth, newWidth)
+            slideView(coinInfoCollapsedChartView, dpHeight * 0.75f, 104f)
+
+            collapsedLinearLayout.animate().x(startX).y(startY).withStartAction {
+                startTextSizeAnimation(coinInfoPriceTextView, 16f, 36f)
+                startTextSizeAnimation(coinInfoChangeTextView, 12f, 16f)
+                coinInfoCollapsedLogoContainer.visibility = View.GONE
+            }.setDuration(delay).start()
+
+            initChart(collapsedChartList, false)
+
+
+            coinInfoPriceChangeContainer.visibility = View.VISIBLE
+            coinInfoShowAllButton.visibility = View.VISIBLE
+            coinInfoCollapseButton.visibility = View.GONE
+        }
     }
 
     private fun observeViewModel() {
@@ -154,22 +176,55 @@ class CoinInfoFragment : Fragment() {
                 coin.rank,
                 coin.symbol
             )
+
+            val priceChange = coin.price / 100 * coin.priceChange1h
             with(binding) {
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoLogoImageView)
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoCollapsedLogoImageView)
                 coinInfoNameTextView.text = coin.name
                 coinInfoCollapsedNameTextView.text = coin.name
                 coinInfoSymbolTextView.text = coin.symbol
-                coinInfoPriceTextView.text = coin.price.toString()
-                coinInfoChangeTextView.text = coin.priceChange1d.toString()
+                coinInfoPriceTextView.text = String.format(
+                    requireContext().getString(R.string.price_placeholder),
+                    coin.price
+                )
+                coinInfoChangeTextView.apply {
+                    text = String.format(
+                        context.getString(
+                            if (coin.priceChange1h < 0) {
+                                R.string.price_change_placeholder_fav_minus
+                            } else {
+                                R.string.price_change_placeholder_fav_plus
+                            }
+                        ),
+                        priceChange,
+                        coin.priceChange1h.absoluteValue
+                    )
+                    setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            if (coin.priceChange1h < 0) {
+                                R.color.minus_color
+                            } else {
+                                R.color.plus_color
+                            }
+                        )
+                    )
+                }
             }
         }
         viewModel.coinHistory.observe(viewLifecycleOwner) { coinHistory ->
             initChart(coinHistory.prices, false)
             collapsedChartList = coinHistory.prices
             if (coinHistory.prices.isNotEmpty()) {
-                binding.coinInfoMaxTextView.text = coinHistory.prices.max().toString()
-                binding.coinInfoMinTextView.text = coinHistory.prices.min().toString()
+                binding.coinInfoMaxTextView.text = String.format(
+                    requireContext().getString(R.string.price_placeholder),
+                    coinHistory.prices.max()
+                )
+                binding.coinInfoMinTextView.text = String.format(
+                    requireContext().getString(R.string.price_placeholder),
+                    coinHistory.prices.min()
+                )
             }
         }
     }
@@ -190,7 +245,13 @@ class CoinInfoFragment : Fragment() {
             }
             prices.add("index22" to list.last().toFloat())
         }
-        binding.coinInfoCollapsedChartView.animate(prices)
+        binding.coinInfoCollapsedChartView.apply {
+            gradientFillColors = intArrayOf(
+                ContextCompat.getColor(requireContext(), R.color.button_background),
+                Color.TRANSPARENT
+            )
+            animate(prices)
+        }
     }
 
     private fun slideView(view: View, currentWidth: Float, newWidth: Float) {
@@ -210,6 +271,12 @@ class CoinInfoFragment : Fragment() {
             binding.coinInfoCollapsedChartView.animate(prices)
         }
         animationSet.start()
+    }
+
+    private fun startTextSizeAnimation(textView: TextView, currentSize: Float, newSize: Float) {
+        ObjectAnimator.ofFloat(
+            textView, "textSize", currentSize, newSize
+        ).setDuration(delay).start()
     }
 
     override fun onDestroy() {

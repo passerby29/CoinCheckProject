@@ -9,4 +9,6 @@
     <string name="price_change_placeholder_fav_plus">+\u0024%1s \u0028%2s\%%\u0029</string>
     <string name="price_change_placeholder_fav_minus">-\u0024%1s \u0028%2s\%%\u0029</string>
     <string name="price_change_placeholder_coin">%s\%%</string>
+    <string name="today_min_placeholder">Today MIN: %s</string>
+    <string name="today_max_placeholder">Today MAX: %s</string>
 </resources>
