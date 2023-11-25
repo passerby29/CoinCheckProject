@@ -85,7 +85,7 @@ class CoinInfoFragment : Fragment() {
                     binding.coinInfoFavButton.setImageResource(R.drawable.ic_favorite_border)
                 } else {
                     viewModel.addCoinToFav(favoriteModel)
-                    binding.coinInfoFavButton.setImageResource(R.drawable.ic_search)
+                    binding.coinInfoFavButton.setImageResource(R.drawable.ic_favorite_filled)
                 }
             }
         }
@@ -137,10 +137,11 @@ class CoinInfoFragment : Fragment() {
             startY = 32f
 
             coinInfoPriceChangeContainer.visibility = View.GONE
-            coinInfoShowAllButton.visibility = View.GONE
             coinInfoCollapseButton.visibility = View.VISIBLE
+            coinInfoShowAllButton.visibility = View.GONE
         }
     }
+
 
     private fun collapseChart() {
         with(binding) {
@@ -180,7 +181,7 @@ class CoinInfoFragment : Fragment() {
                 coin.symbol
             )
 
-            val priceChange = roundDouble(coin.price / 100 * coin.priceChange1h)
+            val priceChange = roundDouble(coin.price / 100 * coin.priceChange1h).toBigDecimal()
             with(binding) {
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoLogoImageView)
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoCollapsedLogoImageView)
@@ -200,7 +201,7 @@ class CoinInfoFragment : Fragment() {
                                 R.string.price_change_placeholder_fav_plus
                             }
                         ),
-                        priceChange,
+                        priceChange.abs(),
                         coin.priceChange1h.absoluteValue
                     )
                     setTextColor(
@@ -221,13 +222,21 @@ class CoinInfoFragment : Fragment() {
             collapsedChartList = coinHistory.prices
             if (coinHistory.prices.isNotEmpty()) {
                 binding.coinInfoMaxTextView.text = String.format(
-                    requireContext().getString(R.string.price_placeholder),
+                    requireContext().getString(R.string.today_max_placeholder),
                     coinHistory.prices.max()
                 )
                 binding.coinInfoMinTextView.text = String.format(
-                    requireContext().getString(R.string.price_placeholder),
+                    requireContext().getString(R.string.today_min_placeholder),
                     coinHistory.prices.min()
                 )
+            }
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            if (viewModel.isCoinAddedToFav()) {
+                binding.coinInfoFavButton.setImageResource(R.drawable.ic_favorite_filled)
+            } else {
+                binding.coinInfoFavButton.setImageResource(R.drawable.ic_favorite_border)
             }
         }
     }
@@ -282,9 +291,9 @@ class CoinInfoFragment : Fragment() {
         ).setDuration(delay).start()
     }
 
-    fun roundDouble(double: Double): Double {
+    private fun roundDouble(double: Double): Double {
         val locale = Locale("en", "UK")
-        val pattern = if (double >= 10) {
+        val pattern = if (double >= 10 || double <= -10) {
             DECIMAL_FORMAT_PATTERN_TWO
         } else {
             DECIMAL_FORMAT_PATTERN_FOUR
