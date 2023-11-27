@@ -130,6 +130,7 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
                     coinMapper.mapDtoToDbModel(it)
                 }
                 coinDao.insertCoin(dbModelList ?: emptyList())
+                updateFavorites()
                 Log.d(TAG, "loadCoinsTry: ${response.isSuccessful}")
             } else {
                 coinsListResult.value = BaseResponse.Error(response.message())
@@ -141,7 +142,12 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
         }
     }
 
-    override fun updateFavorites() {
+    override fun searchCoins(coinFilter: String): LiveData<List<CoinModel>> {
+        val coinsList = coinDao.searchCoins(coinFilter)
+        return getEntityList(coinsList)
+    }
+
+    private fun updateFavorites() {
         CoroutineScope(Dispatchers.IO).launch {
             val favoriteList = favoriteDao.getFavoritesListNotLiveData()
             favoriteList.forEach {
@@ -154,11 +160,6 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
                 )
             }
         }
-    }
-
-    override fun searchCoins(coinFilter: String): LiveData<List<CoinModel>> {
-        val coinsList = coinDao.searchCoins(coinFilter)
-        return getEntityList(coinsList)
     }
 
     private fun getEntityList(coinsList: LiveData<List<CoinDbModel>>): LiveData<List<CoinModel>> {

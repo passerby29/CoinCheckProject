@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dev.passerby.data.repos.HomeRepositoryImpl
 import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.usecases.SearchCoinsUseCase
-import dev.passerby.domain.usecases.UpdateFavoritesUseCase
 import dev.passerby.domain.usecases.get.GetCoinsListUseCase
 import dev.passerby.domain.usecases.get.GetDateUseCase
 import dev.passerby.domain.usecases.get.GetFavCoinsListUseCase
@@ -24,7 +23,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val getTopCoinsListUseCase = GetTopCoinsListUseCase(repository)
     private val loadCoinsHistoryUseCase = LoadCoinsHistoryUseCase(repository)
     private val loadCoinsListUseCase = LoadCoinsListUseCase(repository)
-    private val updateFavoritesUseCase = UpdateFavoritesUseCase(repository)
     private val searchCoinsUseCase = SearchCoinsUseCase(repository)
 
     val coinsList = getCoinsListUseCase()
@@ -37,7 +35,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             loadCoinsListUseCase()
             loadCoinsHistoryUseCase()
         }
-        updateFavoritesUseCase()
     }
 
     fun searchCoins(coinFilter: String): LiveData<List<CoinModel>> {

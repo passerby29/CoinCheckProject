@@ -14,7 +14,5 @@ interface HomeRepository {
     suspend fun loadCoinsHistory()
     suspend fun loadCoinsList()
 
-    fun updateFavorites()
-
     fun searchCoins(coinFilter: String): LiveData<List<CoinModel>>
 }
