@@ -146,6 +146,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llCurrency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/main_background"
@@ -187,75 +188,96 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/main_background"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Application developer and designer"
+            android:fontFamily="@font/outfit_semi_bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginVertical="8dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/outfit_medium"
-                android:includeFontPadding="false"
-                android:text="Developer"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:layout_weight="1"
+                android:layout_marginVertical="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/item_icon_button_background"
-                android:src="@drawable/ic_github" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_medium"
+                    android:includeFontPadding="false"
+                    android:text="Developer"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/settingsGithubButton"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/item_icon_button_background"
+                    android:src="@drawable/ic_github" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_regular"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:text="Yusuf\nMuratov"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/outfit_regular"
-                android:includeFontPadding="false"
-                android:text="passerby29"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-        </LinearLayout>
+                android:layout_weight="1"
+                android:layout_marginVertical="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginVertical="8dp"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_medium"
+                    android:includeFontPadding="false"
+                    android:text="Designer"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/outfit_medium"
-                android:includeFontPadding="false"
-                android:text="Designer"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/settingsDribbleButton"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/item_icon_button_background"
+                    android:src="@drawable/ic_dribble" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/item_icon_button_background"
-                android:src="@drawable/ic_dribble" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/outfit_regular"
-                android:includeFontPadding="false"
-                android:text="passerby29"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_regular"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:text="Elmaz\nChorabatyrova"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

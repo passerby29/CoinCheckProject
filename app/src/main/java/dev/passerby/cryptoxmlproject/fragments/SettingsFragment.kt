@@ -1,33 +1,64 @@
 package dev.passerby.cryptoxmlproject.fragments
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.passerby.cryptoxmlproject.R
+import androidx.navigation.fragment.findNavController
+import dev.passerby.cryptoxmlproject.adapter.LanguageSelectionAdapter
+import dev.passerby.cryptoxmlproject.databinding.FragmentSettingsBinding
+import dev.passerby.cryptoxmlproject.dialogs.LanguageDialog
 import dev.passerby.cryptoxmlproject.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding: FragmentSettingsBinding
+    get() = _binding ?: throw RuntimeException("FragmentSettingsBinding is null")
 
-    private lateinit var viewModel: SettingsViewModel
+    private val viewModel by lazy {
+        ViewModelProvider(this)[SettingsViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    ): View {
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.roomsToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.settingsGithubButton.setOnClickListener {
+            openBrowser("https://github.com/passerby29")
+        }
+        binding.settingsDribbleButton.setOnClickListener {
+            //TODO()
+        }
+        binding.linearLayout3.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialog())
+        }
+        binding.llCurrency.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToCurrencyDialog())
+        }
     }
 
+    private fun openBrowser(url: String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+        _binding = null
+    }
 }

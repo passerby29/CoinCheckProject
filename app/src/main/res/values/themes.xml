@@ -28,4 +28,16 @@
         <item name="cornerSizeBottomRight">8dp</item>
         <item name="cornerSizeBottomLeft">8dp</item>
     </style>
+
+    <style name="RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">500dp</item>
+        <item name="cornerSizeTopLeft">500dp</item>
+        <item name="cornerSizeBottomRight">500dp</item>
+        <item name="cornerSizeBottomLeft">500dp</item>
+    </style>
+
+    <style name="RadioButtonStyle">
+        <item name="buttonTint">@color/white</item>
+    </style>
 </resources>

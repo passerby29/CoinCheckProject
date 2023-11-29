@@ -33,7 +33,14 @@
         android:id="@+id/settingsFragment"
         android:name="dev.passerby.cryptoxmlproject.fragments.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_languageDialog"
+            app:destination="@id/languageDialog" />
+        <action
+            android:id="@+id/action_settingsFragment_to_currencyDialog"
+            app:destination="@id/currencyDialog" />
+    </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
         android:name="dev.passerby.cryptoxmlproject.fragments.BottomSheetFragment"
@@ -42,4 +49,12 @@
             android:id="@+id/action_bottomSheetFragment_to_coinInfoFragment"
             app:destination="@id/coinInfoFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/languageDialog"
+        android:name="dev.passerby.cryptoxmlproject.dialogs.LanguageDialog"
+        android:label="LanguageDialog" />
+    <dialog
+        android:id="@+id/currencyDialog"
+        android:name="dev.passerby.cryptoxmlproject.dialogs.CurrencyDialog"
+        android:label="CurrencyDialog" />
 </navigation>
