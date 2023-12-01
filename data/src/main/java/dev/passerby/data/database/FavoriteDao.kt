@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import dev.passerby.data.models.db.CoinDbModel
 import dev.passerby.data.models.db.FavoriteDbModel
 
@@ -13,6 +14,9 @@ interface FavoriteDao {
 
     @Query("select * from favorites order by rank")
     fun getFavoritesList(): LiveData<List<FavoriteDbModel>>
+
+    @Query("select * from favorites order by rank")
+    fun getFavoritesListNotLiveData(): List<FavoriteDbModel>
 
     @Query("select count( * ) from favorites")
     fun getFavoritesCount(): Int
@@ -24,6 +28,6 @@ interface FavoriteDao {
     @Query("delete from favorites where id = :coinId")
     suspend fun deleteFavorite(coinId: String)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(coinModel: FavoriteDbModel)
 }

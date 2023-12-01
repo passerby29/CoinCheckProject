@@ -77,7 +77,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private fun setOnCoinClickListener() {
         coinsAdapter?.onCoinItemCLickListener = {
             findNavController().navigate(
-                BottomSheetFragmentDirections.actionBottomSheetFragmentToCoinInfoFragment(it.rank, it.id)
+                BottomSheetFragmentDirections.actionBottomSheetFragmentToCoinInfoFragment(it.id)
             )
         }
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_background"
     tools:context=".fragments.CoinInfoFragment">
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -11,9 +12,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
-        android:background="#c9c9c9"
+        android:background="@drawable/item_icon_button_background"
         android:src="@drawable/ic_arrow_back"
-        android:tint="@color/black"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +40,8 @@
             android:id="@+id/coinInfoCollapsedNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/outfit_semi_bold"
+            android:textColor="@color/white"
             android:textSize="24sp"
             tools:text="Bitcoin" />
     </LinearLayout>
@@ -48,9 +51,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
-        android:background="#c9c9c9"
-        android:src="@drawable/ic_favorite_border"
-        android:tint="@color/black"
+        android:background="@drawable/item_icon_button_background"
+        android:src="@drawable/ic_favorite_filled"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,6 +79,9 @@
             android:id="@+id/coinInfoNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/outfit_bold"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
             android:textSize="40sp"
             tools:text="Bitcoin" />
 
@@ -84,6 +89,9 @@
             android:id="@+id/coinInfoSymbolTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/outfit_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
             android:textSize="24sp"
             tools:text="BTC" />
     </LinearLayout>
@@ -101,13 +109,18 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_sheet_background"
         android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/coinInfoCollapseButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/item_icon_button_background"
+            android:src="@drawable/ic_close"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +128,7 @@
             android:id="@+id/collapsedLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,15 +139,21 @@
                 android:id="@+id/coinInfoPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_medium"
+                android:includeFontPadding="false"
                 android:text="$27,243.00"
-                android:textSize="40sp" />
+                android:textColor="@color/white"
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/coinInfoChangeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_regular"
+                android:includeFontPadding="false"
                 android:text="+$4,271 (18,55%)"
-                android:textSize="24sp" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,6 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
+            android:background="@color/search_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collapsedLinearLayout">
@@ -151,29 +171,38 @@
                 android:id="@+id/coinInfoMaxTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today MAX: $22,124"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:fontFamily="@font/outfit_regular"
+                android:text="@string/today_max_placeholder"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_search"
-                app:drawableTint="@color/black" />
+                app:drawableStartCompat="@drawable/ic_chart_up" />
 
             <TextView
                 android:id="@+id/coinInfoMinTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Today MAX: $22,124"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:fontFamily="@font/outfit_regular"
+                android:text="@string/today_min_placeholder"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_search"
-                app:drawableTint="@color/black" />
+                app:drawableStartCompat="@drawable/ic_chart_down" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/coinInfoShowAllButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:backgroundTint="#C8C6C7"
+            android:backgroundTint="@color/light_button_background"
+            android:fontFamily="@font/outfit_bold"
+            android:text="See chart"
+            android:textSize="20sp"
             app:cornerRadius="4dp"
             app:layout_constraintBottom_toTopOf="@+id/coinInfoCollapsedChartView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +216,11 @@
             android:paddingVertical="8dp"
             app:chart_axis="none"
             app:chart_gridEffect="dotted"
-            app:chart_lineThickness="4dp"
+            app:chart_labelsColor="#0D47A1"
+            app:chart_labelsSize="10sp"
+            app:chart_lineColor="@color/button_background"
+            app:chart_lineThickness="2dp"
+            app:chart_pointsDrawable="@drawable/ic_unselected_dot"
             app:chart_smoothLine="true"
             app:layout_constraintBottom_toTopOf="@+id/materialButtonToggleGroup"
             app:layout_constraintEnd_toEndOf="parent"
@@ -197,21 +230,25 @@
             android:id="@+id/materialButtonToggleGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginBottom="32dp"
+            android:visibility="gone"
+            app:checkedButton="@id/coinInfoOneDayButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:selectionRequired="true"
-            app:checkedButton="@id/coinInfoOneDayButton"
             app:singleSelection="true">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoOneDayButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
+                android:includeFontPadding="false"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
                 android:insetRight="16dp"
@@ -219,15 +256,19 @@
                 android:padding="0dp"
                 android:text="1D"
                 android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoOneWeekButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
@@ -236,15 +277,19 @@
                 android:padding="0dp"
                 android:text="1w"
                 android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoOneMonthButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
@@ -253,15 +298,19 @@
                 android:padding="0dp"
                 android:text="1m"
                 android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoThreeMonthButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
@@ -270,15 +319,19 @@
                 android:padding="0dp"
                 android:text="3m"
                 android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoSixMonthButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
@@ -287,15 +340,19 @@
                 android:padding="0dp"
                 android:text="6m"
                 android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoOneYearButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
@@ -304,26 +361,31 @@
                 android:padding="0dp"
                 android:text="1Y"
                 android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/coinInfoAllButton"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/button_background_selector"
+                android:fontFamily="@font/outfit_medium"
                 android:gravity="center"
                 android:insetLeft="16dp"
                 android:insetTop="0dp"
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:textAllCaps="true"
                 android:text="all"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="0dp" />
+                app:cornerRadius="0dp"
+                app:strokeWidth="0dp" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>

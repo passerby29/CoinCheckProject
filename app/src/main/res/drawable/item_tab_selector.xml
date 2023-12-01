@@ -4,5 +4,5 @@
     <item android:drawable="@drawable/ic_selected_dot"
         android:state_selected="true"/>
 
-    <item android:drawable="@drawable/ic_default_dot"/>
+    <item android:drawable="@drawable/ic_unselected_dot"/>
 </selector>

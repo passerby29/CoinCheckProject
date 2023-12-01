@@ -2,8 +2,8 @@ package dev.passerby.data.mappers
 
 import dev.passerby.data.models.db.CoinDbModel
 import dev.passerby.data.models.dto.info.CoinDto
-import dev.passerby.domain.models.CoinModel
 import dev.passerby.data.roundDouble
+import dev.passerby.domain.models.CoinModel
 
 class CoinMapper {
 
@@ -18,9 +18,9 @@ class CoinMapper {
         name = dto.name,
         price = roundDouble(dto.price),
         priceBtc = dto.priceBtc,
-        priceChange1d = dto.priceChange1d,
-        priceChange1h = dto.priceChange1h,
-        priceChange1w = dto.priceChange1w,
+        priceChange1d = roundDouble(dto.priceChange1d),
+        priceChange1h = roundDouble(dto.priceChange1h),
+        priceChange1w = roundDouble(dto.priceChange1w),
         rank = dto.rank,
         redditUrl = dto.redditUrl,
         symbol = dto.symbol,

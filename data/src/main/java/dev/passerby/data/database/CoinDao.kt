@@ -13,13 +13,16 @@ interface CoinDao {
     @Query("select * from coins where id = :coinId")
     fun getCoinInfo(coinId: String): LiveData<CoinDbModel>
 
+    @Query("select * from coins where id = :coinId")
+    fun getCoinInfoNotLiveData(coinId: String): CoinDbModel
+
     @Query("select * from coins")
     fun getCoinsList(): LiveData<List<CoinDbModel>>
 
     @Query("select * from coins")
     fun getCoinsListWorker(): List<CoinDbModel>
 
-    @Query("select * from coins limit 5")
+    @Query("select * from coins limit 4")
     fun getTopCoins(): LiveData<List<CoinDbModel>>
 
     @Query("select * from coins where id like :filter order by rank")

@@ -13,8 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
@@ -44,6 +47,7 @@ class HomeFragment : Fragment() {
     private lateinit var coinPredictionsAdapter: CoinPredictionsAdapter
     private lateinit var favoritesAdapter: FavoritesAdapter
     private var filterString = ""
+    private var isSearchOpen = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -75,23 +79,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSearch() {
-        var isSearchOpen = false
+        isSearchOpen = false
         binding.homeSearchButton.setOnClickListener {
+            val displayMetrics = requireContext().resources.displayMetrics
+            val dpWidth = displayMetrics.widthPixels / displayMetrics.density
             isSearchOpen = if (isSearchOpen) {
-                slideView(binding.homeDateTextView, 1, 264)
-                slideView(binding.homeSearchEditText, 272, 1)
+                lifecycleScope.launch {
+                    slideView(binding.homeDateTextView, 1f, dpWidth * 0.65f)
+                    delay(50)
+                    slideView(binding.homeSearchEditText, dpWidth * 0.65f, 10f)
+                }
                 false
             } else {
-                slideView(binding.homeDateTextView, 264, 1)
-                slideView(binding.homeSearchEditText, 1, 272)
+                lifecycleScope.launch {
+                    slideView(binding.homeSearchEditText, 1f, dpWidth * 0.65f)
+                    delay(50)
+                    slideView(binding.homeDateTextView, dpWidth * 0.65f, 10f)
+                }
                 true
             }
-            binding.homeSearchPredictionsContainer.visibility = if (isSearchOpen){
+            binding.homeSearchPredictionsContainer.visibility = if (isSearchOpen) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-            if (!isSearchOpen){
+            if (!isSearchOpen) {
                 hideSoftKeyboard(requireActivity(), binding.homeSearchEditText)
             } else {
                 openSoftKeyboard(requireActivity(), binding.homeSearchEditText)
@@ -197,7 +209,7 @@ class HomeFragment : Fragment() {
     private fun setOnCoinClickListener() {
         coinsAdapter.onCoinItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
             )
         }
     }
@@ -205,7 +217,7 @@ class HomeFragment : Fragment() {
     private fun setOnPredictionClickListener() {
         coinPredictionsAdapter.onPredictionItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
             )
         }
     }
@@ -213,16 +225,16 @@ class HomeFragment : Fragment() {
     private fun setOnFavoriteClickListener() {
         favoritesAdapter.onFavItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.rank, it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
             )
         }
     }
 
-    private fun slideView(view: View, currentWidth: Int, newWidth: Int) {
-        val slideAnimator = ValueAnimator.ofInt(currentWidth, newWidth).setDuration(500)
+    private fun slideView(view: View, currentWidth: Float, newWidth: Float) {
+        val slideAnimator = ValueAnimator.ofFloat(currentWidth, newWidth).setDuration(500)
 
         slideAnimator.addUpdateListener { animation1: ValueAnimator ->
-            val value = animation1.animatedValue as Int
+            val value = animation1.animatedValue as Float
             view.layoutParams.width =
                 (value * Resources.getSystem().displayMetrics.density).roundToInt()
             view.requestLayout()
@@ -230,6 +242,20 @@ class HomeFragment : Fragment() {
         val animationSet = AnimatorSet()
         animationSet.interpolator = AccelerateDecelerateInterpolator()
         animationSet.play(slideAnimator)
+        animationSet.doOnStart {
+            if (isSearchOpen) {
+                binding.homeDateTextView.visibility = View.VISIBLE
+            } else {
+                binding.homeSearchEditText.visibility = View.VISIBLE
+            }
+        }
+        animationSet.doOnEnd {
+            if (isSearchOpen) {
+                binding.homeDateTextView.visibility = View.INVISIBLE
+            } else {
+                binding.homeSearchEditText.visibility = View.INVISIBLE
+            }
+        }
         animationSet.start()
     }
 
