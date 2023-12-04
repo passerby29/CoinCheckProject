@@ -23,6 +23,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     var languages = getLanguagesListUseCase()
     var currencies = getCurrenciesListUseCase()
 
+    private val _selectedThemeId = MutableLiveData<Int>(0)
+    val selectedThemeId: LiveData<Int>
+        get() = _selectedThemeId
+
     private val _isLanguageChanged = MutableLiveData<Boolean>()
     val isLanguageChanged: LiveData<Boolean>
         get() = _isLanguageChanged
@@ -47,6 +51,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         currencies.forEach {
             if (it.isChecked) _currentCurrency.value = it
         }
+    }
+
+    fun changeTheme(themeId: Int){
+        _selectedThemeId.value = themeId
     }
 
     fun selectLanguage(language: LanguageModel) {

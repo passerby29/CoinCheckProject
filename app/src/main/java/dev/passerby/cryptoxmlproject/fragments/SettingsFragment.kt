@@ -51,6 +51,12 @@ class SettingsFragment : Fragment() {
             settingsCurrencyContainer.setOnClickListener {
                 findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToCurrencyDialog())
             }
+            settingsDarkThemeImageView.setOnClickListener {
+                viewModel.changeTheme(0)
+            }
+            settingsLightThemeImageView.setOnClickListener {
+                viewModel.changeTheme(1)
+            }
         }
     }
 
@@ -62,6 +68,16 @@ class SettingsFragment : Fragment() {
 
             currentLanguage.observe(viewLifecycleOwner) {
                 binding.settingsLanguageTextView.text = it.languageName
+            }
+
+            selectedThemeId.observe(viewLifecycleOwner){
+                if (it == 0){
+                    binding.settingsDarkThemeImageView.setBackgroundResource(R.color.button_background)
+                    binding.settingsLightThemeImageView.setBackgroundResource(android.R.color.transparent)
+                } else {
+                    binding.settingsDarkThemeImageView.setBackgroundResource(android.R.color.transparent)
+                    binding.settingsLightThemeImageView.setBackgroundResource(R.color.button_background)
+                }
             }
         }
     }
