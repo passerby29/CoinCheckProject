@@ -60,6 +60,7 @@
             android:fontFamily="@font/outfit_medium"
             android:textSize="20sp"
             android:layout_marginEnd="8dp"/>
+
         <RadioButton
             android:id="@+id/languageRadioButton"
             style="@style/RadioButtonStyle"
@@ -67,6 +68,7 @@
             android:minWidth="0dp"
             tools:checked="true"
             android:minHeight="0dp"
+            android:clickable="false"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

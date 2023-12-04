@@ -6,7 +6,7 @@ import dev.passerby.domain.models.LanguageModel
 
 class CurrencyDiffCallback : DiffUtil.ItemCallback<CurrencyModel>() {
     override fun areItemsTheSame(oldItem: CurrencyModel, newItem: CurrencyModel): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.isChecked == newItem.isChecked
     }
 
     override fun areContentsTheSame(oldItem: CurrencyModel, newItem: CurrencyModel): Boolean {

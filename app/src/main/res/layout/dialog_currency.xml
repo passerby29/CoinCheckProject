@@ -35,9 +35,9 @@
             app:dividerColor="@color/card_background_color" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/languageRecyclerView"
+            android:id="@+id/currencyRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="288dp"
             tools:listitem="@layout/item_currency_selection"
             tools:itemCount="4"
             android:layout_marginHorizontal="16dp" />
@@ -57,6 +57,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/currencyCancelButton"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,6 +67,7 @@
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/currencyAcceptButton"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

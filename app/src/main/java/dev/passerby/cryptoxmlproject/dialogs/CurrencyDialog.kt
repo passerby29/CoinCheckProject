@@ -22,20 +22,41 @@ class CurrencyDialog : DialogFragment(R.layout.dialog_currency) {
 
     private var currencySelectionAdapter: CurrencySelectionAdapter? = null
 
+    private var selectedCurrencyId: Int = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currencySelectionAdapter = CurrencySelectionAdapter(viewModel.selectedCurrency!!.id)
 
-        currencySelectionAdapter = CurrencySelectionAdapter(requireContext())
+        currencySelectionAdapter!!.onCurrencyClickListener = {
+            viewModel.selectCurrency(it)
+            selectedCurrencyId = it.id
+        }
 
         binding = DialogCurrencyBinding.bind(view).apply {
             requireDialog().window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             requireDialog().setCancelable(true)
             requireDialog().show()
 
-            languageRecyclerView.apply {
+
+            currencyRecyclerView.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 adapter = currencySelectionAdapter
+                setHasFixedSize(true)
+            }
+
+            currencyCancelButton.setOnClickListener {
+                dialog?.dismiss()
+            }
+
+            currencyAcceptButton.setOnClickListener {
+                dialog?.dismiss()
+                viewModel.acceptCurrency(selectedCurrencyId)
+            }
+
+            viewModel.isCurrencyChanged.observe(viewLifecycleOwner) {
+                currencyAcceptButton.isEnabled = it
             }
         }
         currencySelectionAdapter!!.submitList(viewModel.currencies)
