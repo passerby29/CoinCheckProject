@@ -6,8 +6,8 @@ import dev.passerby.domain.models.LanguageModel
 
 interface SettingsRepository {
     fun getLanguagesList(): List<LanguageModel>
-
     fun getCurrenciesList(): List<CurrencyModel>
 
+    fun acceptNewLanguage(languageId: Int)
     fun acceptNewCurrency(currencyId: Int)
 }

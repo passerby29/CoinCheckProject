@@ -59,6 +59,10 @@ class SettingsFragment : Fragment() {
             currentCurrency.observe(viewLifecycleOwner) {
                 binding.settingsCurrencyCodeTextView.text = it.currencyCode
             }
+
+            currentLanguage.observe(viewLifecycleOwner) {
+                binding.settingsLanguageTextView.text = it.languageName
+            }
         }
     }
 

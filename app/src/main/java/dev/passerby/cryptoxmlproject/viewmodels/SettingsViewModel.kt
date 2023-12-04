@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dev.passerby.data.repos.SettingsRepositoryImpl
 import dev.passerby.domain.models.CurrencyModel
+import dev.passerby.domain.models.LanguageModel
 import dev.passerby.domain.usecases.AcceptNewCurrencyUseCase
+import dev.passerby.domain.usecases.AcceptNewLanguageUseCase
 import dev.passerby.domain.usecases.get.GetCurrenciesListUseCase
 import dev.passerby.domain.usecases.get.GetLanguagesListUseCase
 
@@ -16,9 +18,18 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val getLanguagesListUseCase = GetLanguagesListUseCase(repository)
     private val getCurrenciesListUseCase = GetCurrenciesListUseCase(repository)
     private val acceptNewCurrencyUseCase = AcceptNewCurrencyUseCase(repository)
+    private val acceptNewLanguageUseCase = AcceptNewLanguageUseCase(repository)
 
-    val languages = getLanguagesListUseCase()
+    var languages = getLanguagesListUseCase()
     var currencies = getCurrenciesListUseCase()
+
+    private val _isLanguageChanged = MutableLiveData<Boolean>()
+    val isLanguageChanged: LiveData<Boolean>
+        get() = _isLanguageChanged
+
+    private val _currentLanguage = MutableLiveData<LanguageModel>()
+    val currentLanguage: LiveData<LanguageModel>
+        get() = _currentLanguage
 
     private val _isCurrencyChanged = MutableLiveData<Boolean>()
     val isCurrencyChanged: LiveData<Boolean>
@@ -29,9 +40,21 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         get() = _currentCurrency
     
     init {
+        languages.forEach {
+            if (it.isChecked) _currentLanguage.value = it
+        }
+
         currencies.forEach {
             if (it.isChecked) _currentCurrency.value = it
         }
+    }
+
+    fun selectLanguage(language: LanguageModel) {
+        if (currentLanguage.value != language){
+            _isLanguageChanged.value = true
+        }
+
+        languages = getLanguagesListUseCase()
     }
 
     fun selectCurrency(currency: CurrencyModel) {
@@ -39,8 +62,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             _isCurrencyChanged.value = true
         }
 
-        currencies.find { it.id == currentCurrency.value?.id}?.isChecked = true
-        currencies.find { it.id == currency.id}?.isChecked = false
         currencies = getCurrenciesListUseCase()
     }
 
@@ -50,7 +71,17 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         _currentCurrency.value = currencies[currencyId]
     }
 
+    fun acceptLanguage(languageId: Int){
+        acceptNewLanguageUseCase(languageId)
+        languages = getLanguagesListUseCase()
+        _currentLanguage.value = languages[languageId]
+    }
+
     fun resetCurrency(){
         _isCurrencyChanged.value = false
+    }
+
+    fun resetLanguage(){
+        _isLanguageChanged.value = false
     }
 }

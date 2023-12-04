@@ -31,6 +31,10 @@ class SettingsRepositoryImpl(application: Application) : SettingsRepository {
         }
     }
 
+    override fun acceptNewLanguage(languageId: Int) {
+        editor.putInt(LANGUAGE_ID, languageId).apply()
+    }
+
     override fun acceptNewCurrency(currencyId: Int) {
         editor.putInt(CURRENCY_ID, currencyId).apply()
     }
