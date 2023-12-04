@@ -4,5 +4,5 @@ data class LanguageModel(
     val id: Int,
     val languageName: String,
     val nativeName: String,
-    val isChecked: Boolean = false
+    var isChecked: Boolean = false
 )

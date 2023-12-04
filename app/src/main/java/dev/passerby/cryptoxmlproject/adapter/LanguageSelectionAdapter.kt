@@ -1,19 +1,18 @@
 package dev.passerby.cryptoxmlproject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.RecyclerView
 import dev.passerby.cryptoxmlproject.callbacks.LanguageDiffCallback
 import dev.passerby.cryptoxmlproject.databinding.ItemLanguageSelectionBinding
 import dev.passerby.cryptoxmlproject.viewholders.LanguageViewHolder
 import dev.passerby.domain.models.LanguageModel
 
-class LanguageSelectionAdapter(private val context: Context) :
+class LanguageSelectionAdapter(private var singleSelectionPosition: Int) :
     ListAdapter<LanguageModel, LanguageViewHolder>(LanguageDiffCallback()) {
 
-    var onPredictionItemCLickListener: ((LanguageModel) -> Unit)? = null
+    var onLanguageClickListener: ((LanguageModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguageViewHolder {
         val itemView = ItemLanguageSelectionBinding.inflate(
@@ -30,7 +29,19 @@ class LanguageSelectionAdapter(private val context: Context) :
         with(binding) {
             coinNameTextView.text = item.languageName
             coinSymbolTextView.text = item.nativeName
-            languageRadioButton.isChecked = item.isChecked
+            languageRadioButton.isChecked = singleSelectionPosition == position
+            root.setOnClickListener {
+                onLanguageClickListener!!.invoke(item)
+                setSingleSelection(position)
+            }
         }
+    }
+
+    private fun setSingleSelection(adapterPosition: Int){
+        if (adapterPosition == RecyclerView.NO_POSITION) return
+
+        notifyItemChanged(singleSelectionPosition)
+        singleSelectionPosition = adapterPosition
+        notifyItemChanged(singleSelectionPosition)
     }
 }
