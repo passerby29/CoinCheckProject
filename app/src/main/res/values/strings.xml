@@ -10,4 +10,13 @@
     <string name="price_change_placeholder_coin">%s\%%</string>
     <string name="today_min_placeholder">Today MIN: \u0024%s</string>
     <string name="today_max_placeholder">Today MAX: \u0024%s</string>
+    <string name="settings_title">Settings</string>
+    <string name="application_language_title">Application language</string>
+    <string name="application_developer_and_designer_title">Application developer and designer</string>
+    <string name="developer_title">Developer</string>
+    <string name="developer_name">Yusuf\nMuratov</string>
+    <string name="designer_title">Designer</string>
+    <string name="designer_name">Elmaz\nChorabatyrova</string>
+    <string name="application_theme_title">Application theme</string>
+    <string name="main_currency_title">Main currency</string>
 </resources>

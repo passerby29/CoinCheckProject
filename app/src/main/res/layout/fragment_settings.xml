@@ -8,7 +8,7 @@
     tools:context=".fragments.SettingsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/roomsTopBarLayout"
+        android:id="@+id/settingsTopBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_background"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/roomsToolbar"
+            android:id="@+id/settingsToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
@@ -31,7 +31,7 @@
                 android:fontFamily="@font/outfit_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="Settings"
+                android:text="@string/settings_title"
                 android:textColor="@color/white"
                 android:textSize="32sp" />
         </com.google.android.material.appbar.MaterialToolbar>
@@ -46,7 +46,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roomsTopBarLayout">
+        app:layout_constraintTop_toBottomOf="@+id/settingsTopBarLayout">
 
         <TextView
             android:id="@+id/textView3"
@@ -55,11 +55,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/outfit_semi_bold"
-            android:text="Application theme"
+            android:text="@string/application_theme_title"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roomsTopBarLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/settingsTopBarLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageView"
+                android:id="@+id/settingsDarkThemeImageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
@@ -76,7 +76,7 @@
                 android:src="@drawable/im_dark_theme"
                 app:contentPadding="2dp"
                 app:layout_constraintDimensionRatio="H, 1:1.3"
-                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/settingsLightThemeImageView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/settingsLightThemeImageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -94,7 +94,7 @@
                 app:layout_constraintDimensionRatio="H, 1:1.3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/settingsDarkThemeImageView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,7 +110,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/settings_language_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/main_background"
@@ -123,7 +123,8 @@
                 android:layout_height="40dp"
                 android:layout_marginVertical="8dp"
                 android:src="@drawable/ic_translation"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:contentDescription="@null" />
 
             <TextView
                 android:layout_width="0dp"
@@ -131,22 +132,23 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/outfit_semi_bold"
-                android:text="Application language"
+                android:text="@string/application_language_title"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/settingsLanguageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_medium"
                 android:includeFontPadding="false"
-                android:text="English"
+                tools:text="English"
                 android:textColor="@color/light_button_background"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llCurrency"
+            android:id="@+id/settingsCurrencyContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/main_background"
@@ -159,7 +161,8 @@
                 android:layout_height="40dp"
                 android:layout_marginVertical="8dp"
                 android:src="@drawable/ic_currency"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:contentDescription="@null" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -168,16 +171,17 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/outfit_semi_bold"
-                android:text="Main currency"
+                android:text="@string/main_currency_title"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/settingsCurrencyCodeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_medium"
                 android:includeFontPadding="false"
-                android:text="USD"
+                tools:text="USD"
                 android:textColor="@color/light_button_background"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -190,27 +194,29 @@
         android:background="@color/main_background"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Application developer and designer"
-            android:fontFamily="@font/outfit_semi_bold"
-            android:textSize="20sp"
-            android:gravity="center"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/white"/>
+            android:fontFamily="@font/outfit_semi_bold"
+            android:gravity="center"
+            android:text="@string/application_developer_and_designer_title"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginVertical="8dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -219,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/outfit_medium"
                     android:includeFontPadding="false"
-                    android:text="Developer"
+                    android:text="@string/developer_title"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -229,15 +235,16 @@
                     android:layout_height="64dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/item_icon_button_background"
-                    android:src="@drawable/ic_github" />
+                    android:src="@drawable/ic_github"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/outfit_regular"
-                    android:includeFontPadding="false"
                     android:gravity="center"
-                    android:text="Yusuf\nMuratov"
+                    android:includeFontPadding="false"
+                    android:text="@string/developer_name"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -245,8 +252,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginVertical="8dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -255,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/outfit_medium"
                     android:includeFontPadding="false"
-                    android:text="Designer"
+                    android:text="@string/designer_title"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -265,15 +272,16 @@
                     android:layout_height="64dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/item_icon_button_background"
-                    android:src="@drawable/ic_dribble" />
+                    android:src="@drawable/ic_dribble"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/outfit_regular"
-                    android:includeFontPadding="false"
                     android:gravity="center"
-                    android:text="Elmaz\nChorabatyrova"
+                    android:includeFontPadding="false"
+                    android:text="@string/designer_name"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>

@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.patrykandpatrick.vico.core.extension.setFieldValue
 import dev.passerby.data.repos.SettingsRepositoryImpl
 import dev.passerby.domain.models.CurrencyModel
 import dev.passerby.domain.usecases.AcceptNewCurrencyUseCase
@@ -25,20 +24,22 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     val isCurrencyChanged: LiveData<Boolean>
         get() = _isCurrencyChanged
 
-    var selectedCurrency: CurrencyModel? = null
-
+    private val _currentCurrency = MutableLiveData<CurrencyModel>()
+    val currentCurrency: LiveData<CurrencyModel>
+        get() = _currentCurrency
+    
     init {
         currencies.forEach {
-            if (it.isChecked) selectedCurrency = it
+            if (it.isChecked) _currentCurrency.value = it
         }
     }
 
     fun selectCurrency(currency: CurrencyModel) {
-        if (selectedCurrency != currency){
+        if (currentCurrency.value != currency){
             _isCurrencyChanged.value = true
         }
 
-        currencies.find { it.id == selectedCurrency?.id}?.isChecked = true
+        currencies.find { it.id == currentCurrency.value?.id}?.isChecked = true
         currencies.find { it.id == currency.id}?.isChecked = false
         currencies = getCurrenciesListUseCase()
     }
@@ -46,5 +47,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     fun acceptCurrency(currencyId: Int){
         acceptNewCurrencyUseCase(currencyId)
         currencies = getCurrenciesListUseCase()
+        _currentCurrency.value = currencies[currencyId]
+    }
+
+    fun resetCurrency(){
+        _isCurrencyChanged.value = false
     }
 }
