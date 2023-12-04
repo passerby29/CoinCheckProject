@@ -5,6 +5,6 @@ data class CurrencyModel(
     val currencyName: String,
     val currencyCode: String,
     val symbol: String,
-    val imageUrl: String,
-    val isChecked: Boolean = false
+    val imageUrl: Int,
+    var isChecked: Boolean = false
 )

@@ -1,19 +1,19 @@
 package dev.passerby.cryptoxmlproject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.RecyclerView
 import dev.passerby.cryptoxmlproject.callbacks.CurrencyDiffCallback
 import dev.passerby.cryptoxmlproject.databinding.ItemCurrencySelectionBinding
 import dev.passerby.cryptoxmlproject.viewholders.CurrencyViewHolder
 import dev.passerby.domain.models.CurrencyModel
 
-class CurrencySelectionAdapter(private val context: Context) :
+
+class CurrencySelectionAdapter(private var singleSelectionPosition: Int) :
     ListAdapter<CurrencyModel, CurrencyViewHolder>(CurrencyDiffCallback()) {
 
-    var onPredictionItemCLickListener: ((CurrencyModel) -> Unit)? = null
+    var onCurrencyClickListener: ((CurrencyModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         val itemView = ItemCurrencySelectionBinding.inflate(
@@ -28,11 +28,23 @@ class CurrencySelectionAdapter(private val context: Context) :
         val item = getItem(position)
         val binding = holder.binding
         with(binding) {
-            Glide.with(context).load(item.imageUrl).into(currencyFlagImageView)
+            currencyFlagImageView.setImageResource(item.imageUrl)
             coinNameTextView.text = item.currencyName
             coinSymbolTextView.text = item.currencyCode
             currencySymbolTextView.text = item.symbol
-            languageRadioButton.isChecked = item.isChecked
+            languageRadioButton.isChecked = singleSelectionPosition == position
+            root.setOnClickListener {
+                onCurrencyClickListener!!.invoke(item)
+                setSingleSelection(position)
+            }
         }
+    }
+
+    private fun setSingleSelection(adapterPosition: Int){
+        if (adapterPosition == RecyclerView.NO_POSITION) return
+
+        notifyItemChanged(singleSelectionPosition)
+        singleSelectionPosition = adapterPosition
+        notifyItemChanged(singleSelectionPosition)
     }
 }

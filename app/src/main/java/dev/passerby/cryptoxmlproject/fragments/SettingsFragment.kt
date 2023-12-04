@@ -2,31 +2,27 @@ package dev.passerby.cryptoxmlproject.fragments
 
 import android.content.Intent
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import dev.passerby.cryptoxmlproject.adapter.LanguageSelectionAdapter
+import androidx.navigation.navGraphViewModels
+import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.databinding.FragmentSettingsBinding
-import dev.passerby.cryptoxmlproject.dialogs.LanguageDialog
 import dev.passerby.cryptoxmlproject.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding: FragmentSettingsBinding
-    get() = _binding ?: throw RuntimeException("FragmentSettingsBinding is null")
+        get() = _binding ?: throw RuntimeException("FragmentSettingsBinding is null")
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[SettingsViewModel::class.java]
-    }
+    private val viewModel: SettingsViewModel by navGraphViewModels(R.id.main_navigation)
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
@@ -34,30 +30,64 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+        observeViewModel()
+    }
 
-        binding.roomsToolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
-        binding.settingsGithubButton.setOnClickListener {
-            openBrowser("https://github.com/passerby29")
-        }
-        binding.settingsDribbleButton.setOnClickListener {
-            //TODO()
-        }
-        binding.linearLayout3.setOnClickListener {
-            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialog())
-        }
-        binding.llCurrency.setOnClickListener {
-            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToCurrencyDialog())
+    private fun initViews() {
+        with(binding) {
+            settingsToolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+            settingsGithubButton.setOnClickListener {
+                openBrowser("https://github.com/passerby29")
+            }
+            settingsDribbleButton.setOnClickListener {
+                openBrowser("https://dribbble.com/shots/23174366-Cryptocurrency-Application")
+            }
+            settingsLanguageContainer.setOnClickListener {
+                findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialog())
+            }
+            settingsCurrencyContainer.setOnClickListener {
+                findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToCurrencyDialog())
+            }
+            settingsDarkThemeImageView.setOnClickListener {
+                viewModel.changeTheme(0)
+            }
+            settingsLightThemeImageView.setOnClickListener {
+                viewModel.changeTheme(1)
+            }
         }
     }
 
-    private fun openBrowser(url: String){
+    private fun observeViewModel() {
+        with(viewModel) {
+            currentCurrency.observe(viewLifecycleOwner) {
+                binding.settingsCurrencyCodeTextView.text = it.currencyCode
+            }
+
+            currentLanguage.observe(viewLifecycleOwner) {
+                binding.settingsLanguageTextView.text = it.languageName
+            }
+
+            selectedThemeId.observe(viewLifecycleOwner){
+                if (it == 0){
+                    binding.settingsDarkThemeImageView.setBackgroundResource(R.color.button_background)
+                    binding.settingsLightThemeImageView.setBackgroundResource(android.R.color.transparent)
+                } else {
+                    binding.settingsDarkThemeImageView.setBackgroundResource(android.R.color.transparent)
+                    binding.settingsLightThemeImageView.setBackgroundResource(R.color.button_background)
+                }
+            }
+        }
+    }
+
+    private fun openBrowser(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 
-    override fun onDestroy(){
+    override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
