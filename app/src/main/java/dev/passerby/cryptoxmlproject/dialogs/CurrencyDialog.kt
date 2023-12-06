@@ -4,9 +4,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.adapter.CurrencySelectionAdapter
 import dev.passerby.cryptoxmlproject.databinding.DialogCurrencyBinding
@@ -49,6 +51,7 @@ class CurrencyDialog : DialogFragment(R.layout.dialog_currency) {
             currencyAcceptButton.setOnClickListener {
                 dialog?.dismiss()
                 viewModel.acceptCurrency(selectedCurrencyId)
+                Toast.makeText(requireContext(), "Next time", Toast.LENGTH_SHORT).show()
             }
 
             viewModel.isCurrencyChanged.observe(viewLifecycleOwner) {

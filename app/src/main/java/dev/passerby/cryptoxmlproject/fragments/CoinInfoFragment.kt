@@ -182,6 +182,12 @@ class CoinInfoFragment : Fragment() {
             )
 
             val priceChange = roundDouble(coin.price / 100 * coin.priceChange1h).toBigDecimal()
+            val currenciesArray =
+                requireContext().resources.getStringArray(R.array.price_placeholder)
+            val priceChangePlus =
+                requireContext().resources.getStringArray(R.array.price_change_placeholder_fav_plus)
+            val priceChangeMinus =
+                requireContext().resources.getStringArray(R.array.price_change_placeholder_fav_minus)
             with(binding) {
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoLogoImageView)
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoCollapsedLogoImageView)
@@ -189,18 +195,16 @@ class CoinInfoFragment : Fragment() {
                 coinInfoCollapsedNameTextView.text = coin.name
                 coinInfoSymbolTextView.text = coin.symbol
                 coinInfoPriceTextView.text = String.format(
-                    requireContext().getString(R.string.price_placeholder),
+                    currenciesArray[1],
                     coin.price
                 )
                 coinInfoChangeTextView.apply {
                     text = String.format(
-                        context.getString(
-                            if (coin.priceChange1h < 0) {
-                                R.string.price_change_placeholder_fav_minus
-                            } else {
-                                R.string.price_change_placeholder_fav_plus
-                            }
-                        ),
+                        if (coin.priceChange1h < 0) {
+                            priceChangeMinus[args.currencyId]
+                        } else {
+                            priceChangePlus[args.currencyId]
+                        },
                         priceChange.abs(),
                         coin.priceChange1h.absoluteValue
                     )
@@ -219,14 +223,16 @@ class CoinInfoFragment : Fragment() {
         }
         viewModel.coinHistory.observe(viewLifecycleOwner) { coinHistory ->
             initChart(coinHistory.prices, false)
+            val todayMax = requireContext().resources.getStringArray(R.array.today_max_placeholder)
+            val todayMin = requireContext().resources.getStringArray(R.array.today_min_placeholder)
             collapsedChartList = coinHistory.prices
             if (coinHistory.prices.isNotEmpty()) {
                 binding.coinInfoMaxTextView.text = String.format(
-                    requireContext().getString(R.string.today_max_placeholder),
+                    todayMax[args.currencyId],
                     coinHistory.prices.max()
                 )
                 binding.coinInfoMinTextView.text = String.format(
-                    requireContext().getString(R.string.today_min_placeholder),
+                    todayMin[args.currencyId],
                     coinHistory.prices.min()
                 )
             }

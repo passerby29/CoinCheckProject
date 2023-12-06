@@ -174,7 +174,7 @@
                 android:drawablePadding="8dp"
                 android:gravity="center"
                 android:fontFamily="@font/outfit_regular"
-                android:text="@string/today_max_placeholder"
+                tools:text="Today MAX: \u0024%s"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_chart_up" />
@@ -187,7 +187,7 @@
                 android:drawablePadding="8dp"
                 android:gravity="center"
                 android:fontFamily="@font/outfit_regular"
-                android:text="@string/today_min_placeholder"
+                tools:text="Today MIN: \u0024%s"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_chart_down" />

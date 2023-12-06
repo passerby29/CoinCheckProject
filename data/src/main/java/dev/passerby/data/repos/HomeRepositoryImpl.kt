@@ -1,10 +1,13 @@
 package dev.passerby.data.repos
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import dev.passerby.data.Constants
+import dev.passerby.data.Constants.Companion.CURRENCY_ID
 import dev.passerby.data.database.AppDatabase
 import dev.passerby.data.mappers.CoinHistoryMapper
 import dev.passerby.data.mappers.CoinMapper
@@ -36,6 +39,10 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
 
     private var coinsListResult: MutableLiveData<BaseResponse<CoinsListDto>> = MutableLiveData()
     private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
+    private val sharedPreferences = application.getSharedPreferences("AppPreferences",
+        Context.MODE_PRIVATE
+    )
+    private val constants = Constants(application)
 
     private val monthNames = listOf(
         "January",
@@ -90,6 +97,10 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
         return getEntityList(coinsList)
     }
 
+    override fun getCurrencyId(): Int {
+        return sharedPreferences.getInt(CURRENCY_ID, 0)
+    }
+
     override suspend fun loadCoinsHistory() {
         CoroutineScope(Dispatchers.IO).launch {
             coinHistoryResult.postValue(BaseResponse.Loading())
@@ -122,8 +133,10 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
 
     override suspend fun loadCoinsList() {
         coinsListResult.value = BaseResponse.Loading()
+        val currencyId = sharedPreferences.getInt(CURRENCY_ID, 0)
+        val currency = constants.currenciesList[currencyId]
         try {
-            val response = apiService.loadCoinsList()
+            val response = apiService.loadCoinsList(currency = currency.currencyCode)
             if (response.code() == 200) {
                 coinsListResult.value = BaseResponse.Success(response.body())
                 val dbModelList = response.body()?.coinsList?.map {

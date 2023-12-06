@@ -4,12 +4,37 @@
     <string name="fav_placeholder">There is nothing in favorites yet!\nClick to see a list of all currencies.</string>
     <string name="coins_list_title">Coins List</string>
 
-    <string name="price_placeholder">\u0024%s</string>
-    <string name="price_change_placeholder_fav_plus">+\u0024%1s \u0028%2s\%%\u0029</string>
-    <string name="price_change_placeholder_fav_minus">-\u0024%1s \u0028%2s\%%\u0029</string>
+    <string-array name="price_placeholder">
+        <item>\u0024%s</item>
+        <item>\u20bd%s</item>
+        <item>\u20b4%s</item>
+        <item>\u20ac%s</item>
+    </string-array>
+    <string-array name="price_change_placeholder_fav_plus">
+        <item>+\u0024%1s \u0028%2s\%%\u0029</item>
+        <item>+\u20bd%1s \u0028%2s\%%\u0029</item>
+        <item>+\u20b4%1s \u0028%2s\%%\u0029</item>
+        <item>+\u20ac%1s \u0028%2s\%%\u0029</item>
+    </string-array>
+    <string-array name="price_change_placeholder_fav_minus">
+        -\u0024%1s \u0028%2s\%%\u0029
+        -\u20bd%1s \u0028%2s\%%\u0029
+        -\u20b4%1s \u0028%2s\%%\u0029
+        -\u20ac%1s \u0028%2s\%%\u0029
+    </string-array>
+    <string-array name="today_min_placeholder">
+        Today MIN: \u0024%s
+        Today MIN: \u20bd%s
+        Today MIN: \u20b4%s
+        Today MIN: \u20ac%s
+    </string-array>
+    <string-array name="today_max_placeholder">
+        Today MAX: \u0024%s
+        Today MAX: \u20bd%s
+        Today MAX: \u20b4%s
+        Today MAX: \u20ac%s
+    </string-array>
     <string name="price_change_placeholder_coin">%s\%%</string>
-    <string name="today_min_placeholder">Today MIN: \u0024%s</string>
-    <string name="today_max_placeholder">Today MAX: \u0024%s</string>
     <string name="settings_title">Settings</string>
     <string name="application_language_title">Application language</string>
     <string name="application_developer_and_designer_title">Application developer and designer</string>

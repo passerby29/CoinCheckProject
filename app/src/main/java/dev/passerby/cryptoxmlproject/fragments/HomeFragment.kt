@@ -145,9 +145,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapters() {
-        coinsAdapter = CoinsAdapter(requireContext())
+        coinsAdapter = CoinsAdapter(requireContext(), viewModel.currencyId)
         coinPredictionsAdapter = CoinPredictionsAdapter(requireContext())
-        favoritesAdapter = FavoritesAdapter(requireContext())
+        favoritesAdapter = FavoritesAdapter(requireContext(), viewModel.currencyId)
     }
 
     private fun initRecyclerView() {
@@ -209,7 +209,7 @@ class HomeFragment : Fragment() {
     private fun setOnCoinClickListener() {
         coinsAdapter.onCoinItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id, viewModel.currencyId)
             )
         }
     }
@@ -217,7 +217,7 @@ class HomeFragment : Fragment() {
     private fun setOnPredictionClickListener() {
         coinPredictionsAdapter.onPredictionItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id, viewModel.currencyId)
             )
         }
     }
@@ -225,7 +225,7 @@ class HomeFragment : Fragment() {
     private fun setOnFavoriteClickListener() {
         favoritesAdapter.onFavItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id, viewModel.currencyId)
             )
         }
     }

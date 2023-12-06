@@ -10,6 +10,7 @@ interface HomeRepository {
     fun getDate(): LiveData<String>
     fun getFavCoinsList(): LiveData<List<FavoriteModel>>
     fun getTopCoinsList(): LiveData<List<CoinModel>>
+    fun getCurrencyId(): Int
 
     suspend fun loadCoinsHistory()
     suspend fun loadCoinsList()
