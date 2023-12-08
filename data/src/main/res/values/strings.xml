@@ -1,8 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="russian_title">Russian</string>
-    <string name="english_title">English</string>
-    <string name="ukrainian_title">Ukrainian</string>
-    <string name="spanish_title">Spanish</string>
-    <string name="kazakh_title">Kazakh</string>
+    <string-array name="english_title">
+        <item>English</item>
+        <item>Английский</item>
+        <item>Англійська</item>
+        <item>Inglés</item>
+        <item>Ағылшын</item>
+    </string-array>
+    <string-array name="russian_title">
+        <item>Russian</item>
+        <item>Русский</item>
+        <item>Російський</item>
+        <item>Ruso</item>
+        <item>Орыс</item>
+    </string-array>
+    <string-array name="ukrainian_title">
+        <item>Ukrainian</item>
+        <item>Украинский</item>
+        <item>Українська</item>
+        <item>Ucranio</item>
+        <item>Украин</item>
+    </string-array>
+    <string-array name="spanish_title">
+        <item>Spanish</item>
+        <item>Испанский</item>
+        <item>Іспанська</item>
+        <item>Español</item>
+        <item>Испан</item>
+    </string-array>
+    <string-array name="kazakh_title">
+        <item>Kazakh</item>
+        <item>Казахский</item>
+        <item>Казахська</item>
+        <item>Kazajo</item>
+        <item>Қазақ</item>
+    </string-array>
+    <string-array name="us_dollar_title">
+        <item>United States Dollar</item>
+        <item>Американский доллар</item>
+        <item>Долар США</item>
+        <item>Dólar de los Estados Unidos</item>
+        <item>АҚШ доллары</item>
+    </string-array>
+    <string-array name="ruble_title">
+        <item>Russia Ruble</item>
+        <item>Российский рубль</item>
+        <item>Російський рубль</item>
+        <item>Rublo ruso</item>
+        <item>Ресей рублі</item>
+    </string-array>
+    <string-array name="hryvnia_title">
+       <item>Ukraine Hryvnia</item>
+       <item>Украинская гривна</item>
+       <item>Українська гривня</item>
+       <item>Ucrania grivna</item>
+       <item>Украина гривнасы</item>
+    </string-array>
+    <string-array name="euro_title">
+        <item>Euro</item>
+        <item>Евро</item>
+        <item>Євро</item>
+        <item>Euro</item>
+        <item>Еуро</item>
+    </string-array>
 </resources>

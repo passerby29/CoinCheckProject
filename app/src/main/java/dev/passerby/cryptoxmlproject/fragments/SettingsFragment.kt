@@ -1,17 +1,22 @@
 package dev.passerby.cryptoxmlproject.fragments
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.databinding.FragmentSettingsBinding
 import dev.passerby.cryptoxmlproject.viewmodels.SettingsViewModel
+import java.util.Locale
 
 class SettingsFragment : Fragment() {
 
@@ -24,6 +29,24 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        val preferences =
+            requireActivity().getSharedPreferences("AppPreferences", AppCompatActivity.MODE_PRIVATE)
+
+        val lang = when (preferences.getInt("langId", 0)) {
+            1 -> "ru"
+            2 -> "uk"
+            3 -> "es"
+            4 -> "kk"
+            else -> "en"
+        }
+
+        val myLocale = Locale(lang)
+        val res: Resources = resources
+        val dm: DisplayMetrics = res.displayMetrics
+        val conf: Configuration = res.configuration
+        conf.setLocale(myLocale)
+        res.updateConfiguration(conf, dm)
+
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -70,8 +93,8 @@ class SettingsFragment : Fragment() {
                 binding.settingsLanguageTextView.text = it.languageName
             }
 
-            selectedThemeId.observe(viewLifecycleOwner){
-                if (it == 0){
+            selectedThemeId.observe(viewLifecycleOwner) {
+                if (it == 0) {
                     binding.settingsDarkThemeImageView.setBackgroundResource(R.color.button_background)
                     binding.settingsLightThemeImageView.setBackgroundResource(android.R.color.transparent)
                 } else {

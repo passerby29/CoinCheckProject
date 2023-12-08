@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Crypto XML Project New</string>
+    <string name="fav_placeholder">У вибраному ще нічого немає! Натисніть, щоб переглянути список усіх валют.</string>
+    <string name="coins_list_title">Список монет</string>
+    <string name="settings_title">Налаштування</string>
+    <string name="application_language_title">Мова програми</string>
+    <string name="application_developer_and_designer_title">Розробник і дизайнер додатку</string>
+    <string name="developer_title">Розробник</string>
+    <string name="developer_name">Юсуф Муратов</string>
+    <string name="designer_title">Дизайнер</string>
+    <string name="designer_name">Ельмаз Чорабатирова</string>
+    <string name="application_theme_title">Тема програми</string>
+    <string name="main_currency_title">Основна валюта</string>
+    <string name="application_currency_title">Валюта додатку</string>
+    <string name="cancel_text">Скасувати</string>
+    <string name="see_chart_button">Дивіться діаграму</string>
+    <string name="button_text_1d">1д</string>
+    <string name="button_text_1w">1т</string>
+    <string name="button_text_1m">1м</string>
+    <string name="button_text_3m">3м</string>
+    <string name="button_text_6m">6м</string>
+    <string name="button_text_1y">1р</string>
+    <string name="button_text_all">все</string>
+    <string name="coin_name_title">Назва монети</string>
+    <string name="your_favorites_title">Ваші улюблені</string>
+    <string name="show_all_button_text">Покажи все</string>
+    <string name="more_button_text">Більше</string>
+</resources>

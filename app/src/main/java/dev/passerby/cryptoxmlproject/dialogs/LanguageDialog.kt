@@ -1,9 +1,13 @@
 package dev.passerby.cryptoxmlproject.dialogs
 
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +15,7 @@ import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.adapter.LanguageSelectionAdapter
 import dev.passerby.cryptoxmlproject.databinding.DialogLanguageBinding
 import dev.passerby.cryptoxmlproject.viewmodels.SettingsViewModel
+import java.util.Locale
 
 class LanguageDialog : DialogFragment(R.layout.dialog_language) {
 

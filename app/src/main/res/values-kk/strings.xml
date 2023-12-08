@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fav_placeholder">Таңдаулыларда әлі ештеңе жоқ! Барлық валюталардың тізімін көру үшін басыңыз.</string>
+    <string name="coins_list_title">Монеталар тізімі</string>
+    <string name="settings_title">Параметрлер</string>
+    <string name="application_language_title">Қолданба тілі</string>
+    <string name="application_developer_and_designer_title">Қолданбаларды әзірлеуші және дизайнер</string>
+    <string name="developer_title">Әзірлеуші</string>
+    <string name="developer_name">Юсуф Мұратов</string>
+    <string name="designer_title">Дизайнер</string>
+    <string name="designer_name">Эльмаз Чорабатырова</string>
+    <string name="application_theme_title">Қолданба тақырыбы</string>
+    <string name="main_currency_title">Негізгі валюта</string>
+    <string name="application_currency_title">Қолданба валютасы</string>
+    <string name="cancel_text">Болдырмау</string>
+    <string name="see_chart_button">Диаграмманы қараңыз</string>
+    <string name="button_text_1d">1D</string>
+    <string name="button_text_1w">1w</string>
+    <string name="button_text_1m">1m</string>
+    <string name="button_text_3m">3m</string>
+    <string name="button_text_6m">6m</string>
+    <string name="button_text_1y">1Y</string>
+    <string name="button_text_all">all</string>
+    <string name="coin_name_title">Монета атауы</string>
+    <string name="your_favorites_title">Таңдаулыларыңыз</string>
+    <string name="show_all_button_text">Барлығын көрсету</string>
+    <string name="more_button_text">Көбірек</string>
+</resources>

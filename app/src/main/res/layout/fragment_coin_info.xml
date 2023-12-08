@@ -16,7 +16,8 @@
         android:src="@drawable/ic_arrow_back"
         android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <LinearLayout
         android:id="@+id/coinInfoCollapsedLogoContainer"
@@ -28,13 +29,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/coinInfoBackButton"
         app:layout_constraintEnd_toStartOf="@+id/coinInfoFavButton"
         app:layout_constraintStart_toEndOf="@+id/coinInfoBackButton"
-        app:layout_constraintTop_toTopOf="@+id/coinInfoBackButton">
+        app:layout_constraintTop_toTopOf="@+id/coinInfoBackButton"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/coinInfoCollapsedLogoImageView"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@+id/coinInfoCollapsedNameTextView"
@@ -54,12 +57,14 @@
         android:background="@drawable/item_icon_button_background"
         android:src="@drawable/ic_favorite_filled"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/coinInfoLogoImageView"
         android:layout_width="148dp"
         android:layout_height="148dp"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,9 +146,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_medium"
                 android:includeFontPadding="false"
-                android:text="$27,243.00"
                 android:textColor="@color/white"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:text="$27,243.00" />
 
             <TextView
                 android:id="@+id/coinInfoChangeTextView"
@@ -151,9 +156,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_regular"
                 android:includeFontPadding="false"
-                android:text="+$4,271 (18,55%)"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:text="+$4,271 (18,55%)" />
         </LinearLayout>
 
         <LinearLayout
@@ -161,8 +166,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:orientation="vertical"
             android:background="@color/search_background"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collapsedLinearLayout">
@@ -172,12 +177,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
-                android:gravity="center"
                 android:fontFamily="@font/outfit_regular"
-                tools:text="Today MAX: \u0024%s"
+                android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_chart_up" />
+                app:drawableStartCompat="@drawable/ic_chart_up"
+                tools:text="Today MAX: \u0024%s" />
 
             <TextView
                 android:id="@+id/coinInfoMinTextView"
@@ -185,12 +190,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawablePadding="8dp"
-                android:gravity="center"
                 android:fontFamily="@font/outfit_regular"
-                tools:text="Today MIN: \u0024%s"
+                android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_chart_down" />
+                app:drawableStartCompat="@drawable/ic_chart_down"
+                tools:text="Today MIN: \u0024%s" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -201,7 +206,7 @@
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/light_button_background"
             android:fontFamily="@font/outfit_bold"
-            android:text="See chart"
+            android:text="@string/see_chart_button"
             android:textSize="20sp"
             app:cornerRadius="4dp"
             app:layout_constraintBottom_toTopOf="@+id/coinInfoCollapsedChartView"
@@ -254,7 +259,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1D"
+                android:text="@string/button_text_1d"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -275,7 +280,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1w"
+                android:text="@string/button_text_1w"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -296,7 +301,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1m"
+                android:text="@string/button_text_1m"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -317,7 +322,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="3m"
+                android:text="@string/button_text_3m"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -338,7 +343,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="6m"
+                android:text="@string/button_text_6m"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -359,7 +364,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="1Y"
+                android:text="@string/button_text_1y"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
@@ -380,7 +385,7 @@
                 android:insetRight="16dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="all"
+                android:text="@string/button_text_all"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
