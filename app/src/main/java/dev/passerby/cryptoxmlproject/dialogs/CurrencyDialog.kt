@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.adapter.CurrencySelectionAdapter
 import dev.passerby.cryptoxmlproject.databinding.DialogCurrencyBinding
@@ -17,7 +16,7 @@ import dev.passerby.cryptoxmlproject.viewmodels.SettingsViewModel
 class CurrencyDialog : DialogFragment(R.layout.dialog_currency) {
 
     private lateinit var binding: DialogCurrencyBinding
-    private val viewModel : SettingsViewModel by navGraphViewModels(R.id.main_navigation)
+    private val viewModel: SettingsViewModel by navGraphViewModels(R.id.main_navigation)
     private var currencySelectionAdapter: CurrencySelectionAdapter? = null
     private var selectedCurrencyId: Int = 0
 
@@ -51,8 +50,10 @@ class CurrencyDialog : DialogFragment(R.layout.dialog_currency) {
             currencyAcceptButton.setOnClickListener {
                 dialog?.dismiss()
                 viewModel.acceptCurrency(selectedCurrencyId)
-                Toast.makeText(requireContext(),
-                    getString(R.string.currency_change_toast), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.currency_change_toast), Toast.LENGTH_SHORT
+                ).show()
             }
 
             viewModel.isCurrencyChanged.observe(viewLifecycleOwner) {
