@@ -12,7 +12,7 @@ import dev.passerby.cryptoxmlproject.databinding.ItemCoinBinding
 import dev.passerby.cryptoxmlproject.viewholders.CoinViewHolder
 import dev.passerby.domain.models.CoinModel
 
-class CoinsAdapter(private val context: Context) :
+class CoinsAdapter(private val context: Context, private val currencyId: Int) :
     ListAdapter<CoinModel, CoinViewHolder>(CoinDiffCallback()) {
 
     var onCoinItemCLickListener: ((CoinModel) -> Unit)? = null
@@ -26,11 +26,12 @@ class CoinsAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
         val item = getItem(position)
         val binding = holder.binding
+        val currenciesArray = context.resources.getStringArray(R.array.price_placeholder)
         with(binding) {
             Glide.with(context).load(item.icon).into(coinLogoImageView)
             coinNameTextView.text = item.name
             coinSymbolTextView.text = item.symbol
-            coinPriceTextView.text = String.format(context.getString(R.string.price_placeholder), item.price)
+            coinPriceTextView.text = String.format(currenciesArray[currencyId], item.price)
             coinChangeTextView.apply {
                 text = String.format(
                     context.getString(R.string.price_change_placeholder_coin),

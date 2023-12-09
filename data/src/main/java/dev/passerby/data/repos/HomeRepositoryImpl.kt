@@ -1,10 +1,14 @@
 package dev.passerby.data.repos
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import dev.passerby.data.Constants
+import dev.passerby.data.Constants.Companion.CURRENCY_ID
+import dev.passerby.data.Constants.Companion.LANGUAGE_ID
 import dev.passerby.data.database.AppDatabase
 import dev.passerby.data.mappers.CoinHistoryMapper
 import dev.passerby.data.mappers.CoinMapper
@@ -23,7 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class HomeRepositoryImpl(application: Application) : HomeRepository {
+class HomeRepositoryImpl(private val application: Application) : HomeRepository {
 
     private val db = AppDatabase.getInstance(application)
     private val coinDao = db.coinDao()
@@ -36,43 +40,24 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
 
     private var coinsListResult: MutableLiveData<BaseResponse<CoinsListDto>> = MutableLiveData()
     private var coinHistoryResult: MutableLiveData<BaseResponse<CoinHistoryDto>> = MutableLiveData()
+    private val sharedPreferences = application.getSharedPreferences("AppPreferences",
+        Context.MODE_PRIVATE
+    )
 
-    private val monthNames = listOf(
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    )
-    private val dayNames = listOf(
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-    )
+    private var constants = Constants(application)
 
     override fun getCoinsList(): LiveData<List<CoinModel>> {
         val coinsList = coinDao.getCoinsList()
         return getEntityList(coinsList)
     }
 
-    override fun getDate(): LiveData<String> {
-        val dateLiveData = MutableLiveData("")
+    override fun getDate(): LiveData<Array<Int>> {
+        val dateLiveData = MutableLiveData<Array<Int>>()
         val calendar = Calendar.getInstance()
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
-        dateLiveData.value = "${dayNames[dayOfWeek]}, ${day}th ${monthNames[month]}"
+        dateLiveData.value = arrayOf(dayOfWeek, day, month)
         return dateLiveData
     }
 
@@ -88,6 +73,10 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
     override fun getTopCoinsList(): LiveData<List<CoinModel>> {
         val coinsList = coinDao.getTopCoins()
         return getEntityList(coinsList)
+    }
+
+    override fun getCurrencyId(): Int {
+        return sharedPreferences.getInt(CURRENCY_ID, 0)
     }
 
     override suspend fun loadCoinsHistory() {
@@ -122,8 +111,12 @@ class HomeRepositoryImpl(application: Application) : HomeRepository {
 
     override suspend fun loadCoinsList() {
         coinsListResult.value = BaseResponse.Loading()
+        val languageId = sharedPreferences.getInt(LANGUAGE_ID, 0)
+        val currencyId = sharedPreferences.getInt(CURRENCY_ID, 0)
+        constants = Constants(application, languageId)
+        val currency = constants.currenciesList[currencyId]
         try {
-            val response = apiService.loadCoinsList()
+            val response = apiService.loadCoinsList(currency = currency.currencyCode)
             if (response.code() == 200) {
                 coinsListResult.value = BaseResponse.Success(response.body())
                 val dbModelList = response.body()?.coinsList?.map {

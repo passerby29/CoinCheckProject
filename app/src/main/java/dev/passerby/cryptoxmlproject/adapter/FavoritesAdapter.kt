@@ -15,7 +15,7 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.math.absoluteValue
 
-class FavoritesAdapter(private val context: Context) :
+class FavoritesAdapter(private val context: Context, private val currencyId: Int) :
     ListAdapter<FavoriteModel, FavoritesViewHolder>(FavoritesDiffCallback()) {
 
     var onFavItemCLickListener: ((FavoriteModel) -> Unit)? = null
@@ -32,20 +32,23 @@ class FavoritesAdapter(private val context: Context) :
         with(binding) {
             val price = roundDouble(item.price)
             val priceChange = roundDouble(item.price / 100 * item.priceChange1h)
+            val currenciesArray = context.resources.getStringArray(R.array.price_placeholder)
+            val priceChangePlus =
+                context.resources.getStringArray(R.array.price_change_placeholder_fav_plus)
+            val priceChangeMinus =
+                context.resources.getStringArray(R.array.price_change_placeholder_fav_minus)
             favoritePriceTextView.text =
-                String.format(context.getString(R.string.price_placeholder), price)
+                String.format(currenciesArray[currencyId], price)
             Glide.with(context).load(item.icon).into(favoriteLogoImageView)
             favoriteNameTexView.text = item.name
             favoriteSymbolTexView.text = item.symbol
             favoriteChangeTextView.apply {
                 text = String.format(
-                    context.getString(
-                        if (item.priceChange1h < 0) {
-                            R.string.price_change_placeholder_fav_minus
-                        } else {
-                            R.string.price_change_placeholder_fav_plus
-                        }
-                    ),
+                    if (item.priceChange1h < 0) {
+                        priceChangeMinus[currencyId]
+                    } else {
+                        priceChangePlus[currencyId]
+                    },
                     priceChange,
                     item.priceChange1h.absoluteValue
                 )

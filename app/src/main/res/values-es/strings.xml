@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fav_placeholder">¡Aún no hay nada en favoritos! Haga clic para ver una lista de todas las monedas.</string>
+    <string name="coins_list_title">Lista de monedas</string>
+    <string name="settings_title">Ajustes</string>
+    <string name="application_language_title">Idioma de la aplicación</string>
+    <string name="application_developer_and_designer_title">Desarrollador y diseñador de aplicaciones</string>
+    <string name="developer_title">Desarrollador</string>
+    <string name="developer_name">Yusuf\nMuratov</string>
+    <string name="designer_title">Diseñadora</string>
+    <string name="designer_name">Elmaz\nChorabatyrova</string>
+    <string name="application_theme_title">Tema de la aplicación</string>
+    <string name="main_currency_title">Moneda principal</string>
+    <string name="application_currency_title">Moneda de la aplicación</string>
+    <string name="cancel_text">Cancelar</string>
+    <string name="see_chart_button">Ve la tabla</string>
+    <string name="button_text_1d">1D</string>
+    <string name="button_text_1w">1w</string>
+    <string name="button_text_1m">1m</string>
+    <string name="button_text_3m">3m</string>
+    <string name="button_text_6m">6m</string>
+    <string name="button_text_1y">1Y</string>
+    <string name="button_text_all">todo</string>
+    <string name="coin_name_title">Nombre de la moneda</string>
+    <string name="your_favorites_title">Tus favoritos</string>
+    <string name="show_all_button_text">Mostrar todo</string>
+    <string name="more_button_text">Más</string>
+
+    <string-array name="monthNames">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Puede</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+    <string-array name="dayNames">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Puede</item>
+        <item>Junio</item>
+        <item>Julio</item>
+    </string-array>
+    <string name="datePlaceholder">%1s, %2s de %3s</string>
+    <string name="currency_change_toast">La moneda cambiará la próxima vez que inicie la aplicación.</string>
+</resources>

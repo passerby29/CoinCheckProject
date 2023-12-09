@@ -1,22 +1,88 @@
 <resources>
-    <string name="app_name">Crypto XML Project New</string>
+    <string name="app_name" translatable="false">Crypto XML Project New</string>
 
-    <string name="fav_placeholder">There is nothing in favorites yet!\nClick to see a list of all currencies.</string>
+    <string name="fav_placeholder">There is nothing in favorites yet! Click to see a list of all currencies.</string>
     <string name="coins_list_title">Coins List</string>
-
-    <string name="price_placeholder">\u0024%s</string>
-    <string name="price_change_placeholder_fav_plus">+\u0024%1s \u0028%2s\%%\u0029</string>
-    <string name="price_change_placeholder_fav_minus">-\u0024%1s \u0028%2s\%%\u0029</string>
-    <string name="price_change_placeholder_coin">%s\%%</string>
-    <string name="today_min_placeholder">Today MIN: \u0024%s</string>
-    <string name="today_max_placeholder">Today MAX: \u0024%s</string>
+    <string name="price_change_placeholder_coin" translatable="false">%s\%%</string>
     <string name="settings_title">Settings</string>
     <string name="application_language_title">Application language</string>
-    <string name="application_developer_and_designer_title">Application developer and designer</string>
     <string name="developer_title">Developer</string>
     <string name="developer_name">Yusuf\nMuratov</string>
     <string name="designer_title">Designer</string>
     <string name="designer_name">Elmaz\nChorabatyrova</string>
     <string name="application_theme_title">Application theme</string>
     <string name="main_currency_title">Main currency</string>
+    <string name="application_currency_title">Application currency</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="ok_text" translatable="false">OK</string>
+    <string name="see_chart_button">See chart</string>
+    <string name="button_text_1d">1D</string>
+    <string name="button_text_1m">1m</string>
+    <string name="button_text_3m">3m</string>
+    <string name="button_text_6m">6m</string>
+    <string name="button_text_1y">1Y</string>
+    <string name="button_text_all">all</string>
+    <string name="coin_name_title">Coin name</string>
+    <string name="your_favorites_title">Your favorites</string>
+    <string name="show_all_button_text">Show all</string>
+    <string name="more_button_text">More</string>
+    <string name="application_developer_and_designer_title">Application developer and designer</string>
+    <string name="button_text_1w">1w</string>
+    <string name="datePlaceholder">%1s, %2s %3s</string>
+
+    <string-array name="price_placeholder">
+        <item>\u0024%s</item>
+        <item>\u20bd%s</item>
+        <item>\u20b4%s</item>
+        <item>\u20ac%s</item>
+    </string-array>
+    <string-array name="price_change_placeholder_fav_plus">
+        <item>+\u0024%1s \u0028%2s\%%\u0029</item>
+        <item>+\u20bd%1s \u0028%2s\%%\u0029</item>
+        <item>+\u20b4%1s \u0028%2s\%%\u0029</item>
+        <item>+\u20ac%1s \u0028%2s\%%\u0029</item>
+    </string-array>
+    <string-array name="price_change_placeholder_fav_minus">
+        <item>-\u0024%1s \u0028%2s\%%\u0029</item>
+        <item>-\u20bd%1s \u0028%2s\%%\u0029</item>
+        <item>-\u20b4%1s \u0028%2s\%%\u0029</item>
+        <item>-\u20ac%1s \u0028%2s\%%\u0029</item>
+    </string-array>
+    <string-array name="today_min_placeholder">
+        <item>Today MIN: \u0024%s</item>
+        <item>Today MIN: \u20bd%s</item>
+        <item>Today MIN: \u20b4%s</item>
+        <item>Today MIN: \u20ac%s</item>
+    </string-array>
+    <string-array name="today_max_placeholder">
+        <item>Today MAX: \u0024%s</item>
+        <item>Today MAX: \u20bd%s</item>
+        <item>Today MAX: \u20b4%s</item>
+        <item>Today MAX: \u20ac%s</item>
+    </string-array>
+
+    <string-array name="monthNames">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="dayNames">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string name="currency_change_toast">The currency will change the next time you launch the application</string>
 </resources>

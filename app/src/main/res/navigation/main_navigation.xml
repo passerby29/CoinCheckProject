@@ -28,6 +28,9 @@
         <argument
             android:name="coinId"
             app:argType="string" />
+        <argument
+            android:name="currencyId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

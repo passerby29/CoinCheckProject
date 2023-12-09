@@ -22,7 +22,9 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_favorite_filled" />
+                android:contentDescription="@null"
+                android:src="@drawable/ic_favorite_filled"
+                tools:ignore="ImageContrastCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +94,7 @@
                 android:id="@+id/favoriteMoreButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="More"
+                android:text="@string/more_button_text"
                 android:textColor="@color/white"
                 android:fontFamily="@font/outfit_bold"
                 android:textSize="16sp"

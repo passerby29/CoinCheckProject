@@ -49,9 +49,10 @@ class LanguageDialog : DialogFragment(R.layout.dialog_language) {
             languageAcceptButton.setOnClickListener {
                 dialog?.dismiss()
                 viewModel.acceptLanguage(selectedLanguageId)
+                requireActivity().recreate()
             }
 
-            viewModel.isLanguageChanged.observe(viewLifecycleOwner){
+            viewModel.isLanguageChanged.observe(viewLifecycleOwner) {
                 languageAcceptButton.isEnabled = it
             }
         }

@@ -21,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
+import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.adapter.CoinPredictionsAdapter
 import dev.passerby.cryptoxmlproject.adapter.CoinsAdapter
 import dev.passerby.cryptoxmlproject.adapter.FavoritesAdapter
@@ -145,9 +146,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapters() {
-        coinsAdapter = CoinsAdapter(requireContext())
+        coinsAdapter = CoinsAdapter(requireContext(), viewModel.currencyId)
         coinPredictionsAdapter = CoinPredictionsAdapter(requireContext())
-        favoritesAdapter = FavoritesAdapter(requireContext())
+        favoritesAdapter = FavoritesAdapter(requireContext(), viewModel.currencyId)
     }
 
     private fun initRecyclerView() {
@@ -190,7 +191,15 @@ class HomeFragment : Fragment() {
             coinsAdapter.submitList(it)
         }
         viewModel.currentDate.observe(viewLifecycleOwner) {
-            binding.homeDateTextView.text = it
+            val dayNames = requireContext().resources.getStringArray(R.array.dayNames)
+            val monthNames = requireContext().resources.getStringArray(R.array.monthNames)
+            val date = String.format(
+                getString(R.string.datePlaceholder),
+                dayNames[it[0]],
+                it[1],
+                monthNames[it[2]]
+            )
+            binding.homeDateTextView.text = date
         }
         viewModel.favCoinsList.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
@@ -209,7 +218,10 @@ class HomeFragment : Fragment() {
     private fun setOnCoinClickListener() {
         coinsAdapter.onCoinItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(
+                    it.id,
+                    viewModel.currencyId
+                )
             )
         }
     }
@@ -217,7 +229,10 @@ class HomeFragment : Fragment() {
     private fun setOnPredictionClickListener() {
         coinPredictionsAdapter.onPredictionItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(
+                    it.id,
+                    viewModel.currencyId
+                )
             )
         }
     }
@@ -225,7 +240,10 @@ class HomeFragment : Fragment() {
     private fun setOnFavoriteClickListener() {
         favoritesAdapter.onFavItemCLickListener = {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(
+                    it.id,
+                    viewModel.currencyId
+                )
             )
         }
     }

@@ -8,6 +8,7 @@ import dev.passerby.data.repos.HomeRepositoryImpl
 import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.usecases.SearchCoinsUseCase
 import dev.passerby.domain.usecases.get.GetCoinsListUseCase
+import dev.passerby.domain.usecases.get.GetCurrencyIdUseCase
 import dev.passerby.domain.usecases.get.GetDateUseCase
 import dev.passerby.domain.usecases.get.GetFavCoinsListUseCase
 import dev.passerby.domain.usecases.get.GetTopCoinsListUseCase
@@ -21,6 +22,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val getDateUseCase = GetDateUseCase(repository)
     private val getFavCoinsListUseCase = GetFavCoinsListUseCase(repository)
     private val getTopCoinsListUseCase = GetTopCoinsListUseCase(repository)
+    private val getCurrencyIdUseCase = GetCurrencyIdUseCase(repository)
     private val loadCoinsHistoryUseCase = LoadCoinsHistoryUseCase(repository)
     private val loadCoinsListUseCase = LoadCoinsListUseCase(repository)
     private val searchCoinsUseCase = SearchCoinsUseCase(repository)
@@ -29,6 +31,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val currentDate = getDateUseCase()
     val favCoinsList = getFavCoinsListUseCase()
     val topCoinsList = getTopCoinsListUseCase()
+    val currencyId = getCurrencyIdUseCase()
 
     init {
         viewModelScope.launch {

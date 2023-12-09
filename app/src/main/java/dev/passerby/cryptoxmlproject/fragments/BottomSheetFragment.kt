@@ -36,7 +36,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        coinsAdapter = CoinsAdapter(requireContext())
+        coinsAdapter = CoinsAdapter(requireContext(), viewModel.currencyId)
 
         setOnCoinClickListener()
 
@@ -77,7 +77,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private fun setOnCoinClickListener() {
         coinsAdapter?.onCoinItemCLickListener = {
             findNavController().navigate(
-                BottomSheetFragmentDirections.actionBottomSheetFragmentToCoinInfoFragment(it.id)
+                BottomSheetFragmentDirections.actionBottomSheetFragmentToCoinInfoFragment(it.id, viewModel.currencyId)
             )
         }
     }
