@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Crypto XML Project New</string>
     <string name="fav_placeholder">В избранном пока ничего нет! Нажмите, чтобы увидеть список всех валют.</string>
     <string name="coins_list_title">Список монет</string>
     <string name="settings_title">Настройки</string>
     <string name="application_language_title">Язык приложения</string>
     <string name="application_developer_and_designer_title">Разработчик и дизайнер приложения</string>
     <string name="developer_title">Разработчик</string>
-    <string name="developer_name">Юсуф Муратов</string>
+    <string name="developer_name">Юсуф\nМуратов</string>
     <string name="designer_title">Дизайнер</string>
-    <string name="designer_name">Эльмаз Чорабатырова</string>
+    <string name="designer_name">Эльмаз\nЧорабатырова</string>
     <string name="application_theme_title">Тема приложения</string>
     <string name="main_currency_title">Основная валюта</string>
     <string name="application_currency_title">Валюта приложения</string>
@@ -26,4 +25,30 @@
     <string name="your_favorites_title">Ваши избранные</string>
     <string name="show_all_button_text">Показать все</string>
     <string name="more_button_text">Больше</string>
+
+    <string-array name="monthNames">
+        <item>Января</item>
+        <item>Февраля</item>
+        <item>Марта</item>
+        <item>Апреля</item>
+        <item>Мая</item>
+        <item>Июня</item>
+        <item>Июля</item>
+        <item>Августа</item>
+        <item>Сентября</item>
+        <item>Октября</item>
+        <item>Ноября</item>
+        <item>Декабря</item>
+    </string-array>
+    <string-array name="dayNames">
+        <item>Воскресенье</item>
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+    </string-array>
+    <string name="datePlaceholder">%1s, %2s %3s</string>
+    <string name="currency_change_toast">Валюта изменится при следующем запуске приложения</string>
 </resources>

@@ -7,9 +7,9 @@
     <string name="settings_title">Settings</string>
     <string name="application_language_title">Application language</string>
     <string name="developer_title">Developer</string>
-    <string name="developer_name">Yusuf Muratov</string>
+    <string name="developer_name">Yusuf\nMuratov</string>
     <string name="designer_title">Designer</string>
-    <string name="designer_name">Elmaz Chorabatyrova</string>
+    <string name="designer_name">Elmaz\nChorabatyrova</string>
     <string name="application_theme_title">Application theme</string>
     <string name="main_currency_title">Main currency</string>
     <string name="application_currency_title">Application currency</string>
@@ -28,6 +28,7 @@
     <string name="more_button_text">More</string>
     <string name="application_developer_and_designer_title">Application developer and designer</string>
     <string name="button_text_1w">1w</string>
+    <string name="datePlaceholder">%1s, %2s %3s</string>
 
     <string-array name="price_placeholder">
         <item>\u0024%s</item>
@@ -59,4 +60,29 @@
         <item>Today MAX: \u20b4%s</item>
         <item>Today MAX: \u20ac%s</item>
     </string-array>
+
+    <string-array name="monthNames">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="dayNames">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string name="currency_change_toast">The currency will change the next time you launch the application</string>
 </resources>

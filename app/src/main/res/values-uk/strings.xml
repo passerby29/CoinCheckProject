@@ -7,9 +7,9 @@
     <string name="application_language_title">Мова програми</string>
     <string name="application_developer_and_designer_title">Розробник і дизайнер додатку</string>
     <string name="developer_title">Розробник</string>
-    <string name="developer_name">Юсуф Муратов</string>
+    <string name="developer_name">Юсуф\nМуратов</string>
     <string name="designer_title">Дизайнер</string>
-    <string name="designer_name">Ельмаз Чорабатирова</string>
+    <string name="designer_name">Ельмаз\nЧорабатирова</string>
     <string name="application_theme_title">Тема програми</string>
     <string name="main_currency_title">Основна валюта</string>
     <string name="application_currency_title">Валюта додатку</string>
@@ -26,4 +26,30 @@
     <string name="your_favorites_title">Ваші улюблені</string>
     <string name="show_all_button_text">Покажи все</string>
     <string name="more_button_text">Більше</string>
+
+    <string-array name="monthNames">
+        <item>Січня</item>
+        <item>Лютого</item>
+        <item>Березня</item>
+        <item>Квітня</item>
+        <item>Травня</item>
+        <item>Червня</item>
+        <item>Липня</item>
+        <item>Серпня</item>
+        <item>Вересня</item>
+        <item>Жовтеня</item>
+        <item>Листопада</item>
+        <item>Грудня</item>
+    </string-array>
+    <string-array name="dayNames">
+        <item>Неділя</item>
+        <item>Понеділок</item>
+        <item>Вівторок</item>
+        <item>Середа</item>
+        <item>Четвер</item>
+        <item>П\'\ятниця</item>
+        <item>Субота</item>
+    </string-array>
+    <string name="datePlaceholder">%1s, %2s %3s</string>
+    <string name="currency_change_toast">Валюта зміниться при наступному запуску програми</string>
 </resources>

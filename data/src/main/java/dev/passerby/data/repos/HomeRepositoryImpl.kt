@@ -51,13 +51,13 @@ class HomeRepositoryImpl(private val application: Application) : HomeRepository 
         return getEntityList(coinsList)
     }
 
-    override fun getDate(): LiveData<String> {
-        val dateLiveData = MutableLiveData("")
+    override fun getDate(): LiveData<Array<Int>> {
+        val dateLiveData = MutableLiveData<Array<Int>>()
         val calendar = Calendar.getInstance()
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
-        dateLiveData.value = "${constants.dayNames[dayOfWeek]}, ${day}th ${constants.monthNames[month]}"
+        dateLiveData.value = arrayOf(dayOfWeek, day, month)
         return dateLiveData
     }
 

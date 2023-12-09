@@ -66,30 +66,6 @@ class Constants(context: Context, languageId: Int = 0) {
         ),
     )
 
-    val monthNames = listOf(
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    )
-    val dayNames = listOf(
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-    )
-
     companion object {
         const val LANGUAGE_ID = "langId"
         const val CURRENCY_ID = "currencyId"

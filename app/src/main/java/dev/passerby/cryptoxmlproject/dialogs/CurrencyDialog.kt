@@ -51,7 +51,8 @@ class CurrencyDialog : DialogFragment(R.layout.dialog_currency) {
             currencyAcceptButton.setOnClickListener {
                 dialog?.dismiss()
                 viewModel.acceptCurrency(selectedCurrencyId)
-                Toast.makeText(requireContext(), "Next time", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    getString(R.string.currency_change_toast), Toast.LENGTH_SHORT).show()
             }
 
             viewModel.isCurrencyChanged.observe(viewLifecycleOwner) {
