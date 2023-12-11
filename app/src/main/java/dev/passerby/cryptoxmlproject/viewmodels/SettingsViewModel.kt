@@ -9,23 +9,24 @@ import dev.passerby.domain.models.CurrencyModel
 import dev.passerby.domain.models.LanguageModel
 import dev.passerby.domain.usecases.AcceptNewCurrencyUseCase
 import dev.passerby.domain.usecases.AcceptNewLanguageUseCase
+import dev.passerby.domain.usecases.AcceptNewThemeUseCase
 import dev.passerby.domain.usecases.get.GetCurrenciesListUseCase
 import dev.passerby.domain.usecases.get.GetLanguagesListUseCase
+import dev.passerby.domain.usecases.get.GetSelectedThemeIdUseCase
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = SettingsRepositoryImpl(application)
     private val getLanguagesListUseCase = GetLanguagesListUseCase(repository)
     private val getCurrenciesListUseCase = GetCurrenciesListUseCase(repository)
+    private val getSelectedThemeIdUseCase = GetSelectedThemeIdUseCase(repository)
     private val acceptNewCurrencyUseCase = AcceptNewCurrencyUseCase(repository)
     private val acceptNewLanguageUseCase = AcceptNewLanguageUseCase(repository)
+    private val acceptNewThemeUseCase = AcceptNewThemeUseCase(repository)
 
     var languages = getLanguagesListUseCase()
     var currencies = getCurrenciesListUseCase()
-
-    private val _selectedThemeId = MutableLiveData<Int>(0)
-    val selectedThemeId: LiveData<Int>
-        get() = _selectedThemeId
+    var selectedThemeId = getSelectedThemeIdUseCase()
 
     private val _isLanguageChanged = MutableLiveData<Boolean>()
     val isLanguageChanged: LiveData<Boolean>
@@ -51,10 +52,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         currencies.forEach {
             if (it.isChecked) _currentCurrency.value = it
         }
-    }
-
-    fun changeTheme(themeId: Int){
-        _selectedThemeId.value = themeId
     }
 
     fun selectLanguage(language: LanguageModel) {
@@ -83,6 +80,11 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         acceptNewLanguageUseCase(languageId)
         languages = getLanguagesListUseCase()
         _currentLanguage.value = languages[languageId]
+    }
+
+    fun acceptTheme(themeId: Int){
+        acceptNewThemeUseCase(themeId)
+        selectedThemeId = getSelectedThemeIdUseCase()
     }
 
     fun resetCurrency(){
