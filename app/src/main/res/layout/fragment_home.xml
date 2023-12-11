@@ -57,9 +57,9 @@
         android:importantForAutofill="no"
         android:inputType="textCapWords"
         android:paddingHorizontal="8dp"
-        android:elevation="4dp"
-        android:textColor="@color/white"
-        android:textColorHint="#33FFFFFF"
+        android:elevation="2dp"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/search_hint_color"
         android:textCursorDrawable="@drawable/item_cursor_background"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/homeDateTextView"
@@ -73,7 +73,7 @@
         android:layout_height="0dp"
         android:visibility="gone"
         app:cardBackgroundColor="@android:color/transparent"
-        app:cardElevation="1dp"
+        app:cardElevation="0dp"
         app:cardPreventCornerOverlap="false"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHeight_percent="0.25"
@@ -99,7 +99,6 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/item_icon_button_background"
         android:src="@drawable/ic_settings"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/homeSearchButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/homeSearchButton" />
@@ -111,7 +110,6 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/item_icon_button_background"
         android:src="@drawable/ic_search"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/homeDateTextView"
         app:layout_constraintEnd_toStartOf="@+id/homeSettingsButton"
         app:layout_constraintTop_toTopOf="@+id/homeDateTextView" />
@@ -123,7 +121,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginVertical="8dp"
         android:visibility="gone"
-        app:cardBackgroundColor="@color/card_background_color"
+        app:cardBackgroundColor="@color/favorite_card_background"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -143,7 +141,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add"
-                app:tint="@color/white"
                 android:contentDescription="@null" />
 
             <TextView
@@ -164,7 +161,7 @@
         android:layout_margin="16dp"
         android:fontFamily="@font/outfit_bold"
         android:text="@string/your_favorites_title"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeDateTextView" />
@@ -175,7 +172,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="32dp"
         android:layout_marginVertical="8dp"
-        app:cardBackgroundColor="@color/card_background_color"
+        app:cardBackgroundColor="@color/favorite_card_background"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -241,7 +238,7 @@
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
                 android:text="@string/coins_list_title"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -265,7 +262,7 @@
                 android:text="@string/show_all_button_text"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:backgroundTint="@color/light_button_background"
+                app:backgroundTint="@color/button_background"
                 app:cornerRadius="4dp" />
         </LinearLayout>
     </LinearLayout>

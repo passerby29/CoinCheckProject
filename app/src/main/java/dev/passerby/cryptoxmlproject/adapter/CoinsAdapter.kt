@@ -41,9 +41,9 @@ class CoinsAdapter(private val context: Context, private val currencyId: Int) :
                     ContextCompat.getColor(
                         context,
                         if (item.priceChange1h < 0) {
-                            R.color.minus_color
+                            R.color.minus_text_color
                         } else {
-                            R.color.plus_color
+                            R.color.plus_text_color
                         }
                     )
                 )

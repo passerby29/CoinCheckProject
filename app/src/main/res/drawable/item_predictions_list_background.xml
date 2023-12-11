@@ -3,5 +3,5 @@
     <corners
         android:bottomLeftRadius="32dp"
         android:bottomRightRadius="32dp" />
-    <solid android:color="@color/date_background"/>
+    <solid android:color="@color/search_background"/>
 </shape>

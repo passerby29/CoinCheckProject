@@ -2,34 +2,34 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_background">#F1F1F2</color>
-    <color name="bottom_sheet_background">#FFFFFF</color>
+    <color name="main_background">#14222B</color>
+    <color name="bottom_sheet_background">#222E3D</color>
     <color name="date_background">#454CEE</color>
     <color name="button_background">#454CEE</color>
     <color name="checked_chart_button_background">#454CEE</color>
-    <color name="unchecked_chart_button_background">#F2F2F3</color>
+    <color name="unchecked_chart_button_background">#272B85</color>
     <color name="favorite_card_background">#39495E</color>
-    <color name="search_background">#FFFFFF</color>
+    <color name="search_background">#242F3D</color>
 
-    <color name="main_text_color">#14222B</color>
-    <color name="main_text_color_disabled">#4D14222B</color>
+    <color name="main_text_color">#FFFFFF</color>
+    <color name="main_text_color_disabled">#4DFFFFFF</color>
     <color name="plus_text_color">#00D77D</color>
     <color name="minus_text_color">#FF2A2A</color>
-    <color name="search_hint_color">#727A80</color>
+    <color name="search_hint_color">#505964</color>
     <color name="settings_selected_text_color">#454CEE</color>
 
-    <color name="main_icon_color">#14222B</color>
+    <color name="main_icon_color">#FFFFFF</color>
 
     <color name="selected_dot_color">#454CEE</color>
     <color name="unselected_dot_color">#E0E0E0</color>
 
     <color name="theme_stroke_color">#454CEE</color>
 
-    <color name="divider_color">#F2F2F3</color>
+    <color name="divider_color">#242F3D</color>
 
     <color name="chart_top_color">#454CEE</color>
-    <color name="chart_bottom_color">#FFFFFF</color>
+    <color name="chart_bottom_color">#222E3D</color>
 
-    <color name="close_background">#14222B</color>
-    <color name="close_color">#FFFFFF</color>
+    <color name="close_background">#FFFFFF</color>
+    <color name="close_color">#14222B</color>
 </resources>

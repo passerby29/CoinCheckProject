@@ -20,7 +20,7 @@
             android:textSize="18sp"
             android:layout_marginStart="8dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/white"
+            android:textColor="@color/main_text_color"
             android:fontFamily="@font/outfit_bold"
             tools:text="Bitcoin" />
 </LinearLayout>

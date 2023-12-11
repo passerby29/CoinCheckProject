@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_bold"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="16sp"
                 tools:text="English" />
 
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_extra_light"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="14sp"
                 tools:text="English" />
         </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/outfit_medium"
-            android:textColor="@color/white"
+            android:textColor="@color/main_text_color"
             android:textSize="20sp"
             tools:text="\u0024" />
 

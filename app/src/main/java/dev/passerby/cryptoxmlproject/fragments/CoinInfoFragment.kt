@@ -4,7 +4,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.res.Resources
-import android.graphics.Color
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -18,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.databinding.FragmentCoinInfoBinding
 import dev.passerby.cryptoxmlproject.factories.CoinInfoViewModelFactory
@@ -91,7 +91,8 @@ class CoinInfoFragment : Fragment() {
         }
 
         for (i in 0 until binding.materialButtonToggleGroup.childCount) {
-            binding.materialButtonToggleGroup.getChildAt(i).setOnClickListener {
+            val button = binding.materialButtonToggleGroup.getChildAt(i) as MaterialButton
+            button.setOnClickListener {
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.loadCoinHistory(PERIOD_LIST[i])?.observe(viewLifecycleOwner) {
                         chartList = it.prices
@@ -141,7 +142,6 @@ class CoinInfoFragment : Fragment() {
             coinInfoShowAllButton.visibility = View.GONE
         }
     }
-
 
     private fun collapseChart() {
         with(binding) {
@@ -195,7 +195,7 @@ class CoinInfoFragment : Fragment() {
                 coinInfoCollapsedNameTextView.text = coin.name
                 coinInfoSymbolTextView.text = coin.symbol
                 coinInfoPriceTextView.text = String.format(
-                    currenciesArray[1],
+                    currenciesArray[args.currencyId],
                     coin.price
                 )
                 coinInfoChangeTextView.apply {
@@ -212,9 +212,9 @@ class CoinInfoFragment : Fragment() {
                         ContextCompat.getColor(
                             context,
                             if (coin.priceChange1h < 0) {
-                                R.color.minus_color
+                                R.color.minus_text_color
                             } else {
-                                R.color.plus_color
+                                R.color.plus_text_color
                             }
                         )
                     )
@@ -265,8 +265,8 @@ class CoinInfoFragment : Fragment() {
         }
         binding.coinInfoCollapsedChartView.apply {
             gradientFillColors = intArrayOf(
-                ContextCompat.getColor(requireContext(), R.color.button_background),
-                Color.TRANSPARENT
+                ContextCompat.getColor(requireContext(), R.color.chart_top_color),
+                ContextCompat.getColor(requireContext(), R.color.chart_bottom_color)
             )
             animate(prices)
         }
