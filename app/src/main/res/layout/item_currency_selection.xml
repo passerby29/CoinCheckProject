@@ -38,6 +38,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/main_text_color"
                 android:textSize="16sp"
+                android:layout_marginBottom="2dp"
                 tools:text="English" />
 
             <TextView
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_extra_light"
                 android:includeFontPadding="false"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/main_text_color"
                 android:textSize="14sp"
                 tools:text="English" />

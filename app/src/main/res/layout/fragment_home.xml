@@ -57,7 +57,7 @@
         android:importantForAutofill="no"
         android:inputType="textCapWords"
         android:paddingHorizontal="8dp"
-        android:elevation="2dp"
+        android:elevation="1dp"
         android:textColor="@color/main_text_color"
         android:textColorHint="@color/search_hint_color"
         android:textCursorDrawable="@drawable/item_cursor_background"
@@ -66,15 +66,12 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/homeDateTextView" />
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:id="@+id/homeSearchPredictionsContainer"
-        style="@style/CustomCardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardElevation="0dp"
-        app:cardPreventCornerOverlap="false"
+        android:elevation="1dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHeight_percent="0.25"
         app:layout_constraintStart_toStartOf="@id/guideline2"
@@ -85,12 +82,12 @@
             android:id="@+id/homeSearchPredictionsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/search_background"
+            android:background="@drawable/item_prediction_background"
             android:overScrollMode="never"
             android:paddingHorizontal="16dp"
             tools:itemCount="4"
             tools:listitem="@layout/item_coin_prediction" />
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/homeSettingsButton"
@@ -123,7 +120,7 @@
         android:visibility="gone"
         app:cardBackgroundColor="@color/favorite_card_background"
         app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintDimensionRatio="H, 3:2"
         app:layout_constraintEnd_toEndOf="parent"

@@ -92,7 +92,7 @@ class SettingsFragment : Fragment() {
             }
 
             currentLanguage.observe(viewLifecycleOwner) {
-                binding.settingsLanguageTextView.text = it.languageName
+                binding.settingsLanguageTextView.text = it.nativeName
             }
 
             selectedThemeId.observe(viewLifecycleOwner) {

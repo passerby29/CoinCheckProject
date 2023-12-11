@@ -124,10 +124,10 @@ class HomeFragment : Fragment() {
                         viewModel.searchCoins(filterString).observe(viewLifecycleOwner) {
                             coinPredictionsAdapter.submitList(it)
                         }
-                        binding.homeSearchPredictionsContainer.cardElevation = 1f
+                        binding.homeSearchPredictionsContainer.elevation = 1f
                     } else {
                         coinPredictionsAdapter.submitList(emptyList())
-                        binding.homeSearchPredictionsContainer.cardElevation = 0f
+                        binding.homeSearchPredictionsContainer.elevation = 0f
                     }
                 }
             }
