@@ -26,6 +26,19 @@
     <string name="show_all_button_text">Mostrar todo</string>
     <string name="more_button_text">Más</string>
 
+    <string-array name="today_min_placeholder">
+        <item>Hoy MÍN: \u0024%s</item>
+        <item>Hoy MÍN: \u20bd%s</item>
+        <item>Hoy MÍN: \u20b4%s</item>
+        <item>Hoy MÍN: \u20ac%s</item>
+    </string-array>
+    <string-array name="today_max_placeholder">
+        <item>Hoy MAX: \u0024%s</item>
+        <item>Hoy MAX: \u20bd%s</item>
+        <item>Hoy MAX: \u20b4%s</item>
+        <item>Hoy MAX: \u20ac%s</item>
+    </string-array>
+
     <string-array name="monthNames">
         <item>Enero</item>
         <item>Febrero</item>

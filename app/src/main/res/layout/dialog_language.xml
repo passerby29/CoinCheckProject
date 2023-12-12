@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:fontFamily="@font/outfit_medium"
+            android:fontFamily="@font/rubik_medium"
             android:layout_gravity="center"
             android:text="@string/application_language_title"
             android:textColor="@color/main_text_color"
@@ -61,7 +61,7 @@
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/outfit_regular"
+                android:fontFamily="@font/rubik_regular"
                 android:text="@string/cancel_text"
                 android:textColor="@color/main_text_color"
                 android:textSize="16sp" />
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:fontFamily="@font/outfit_regular"
+                android:fontFamily="@font/rubik_regular"
                 android:text="@string/ok_text"
                 android:textColor="@color/text_button_color_selector"
                 android:textSize="16sp" />

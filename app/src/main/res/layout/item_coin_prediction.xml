@@ -21,6 +21,6 @@
             android:layout_marginStart="8dp"
             android:layout_gravity="center_vertical"
             android:textColor="@color/main_text_color"
-            android:fontFamily="@font/outfit_bold"
+            android:fontFamily="@font/rubik_bold"
             tools:text="Bitcoin" />
 </LinearLayout>
