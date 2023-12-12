@@ -75,10 +75,12 @@ class SettingsFragment : Fragment() {
                 findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToCurrencyDialog())
             }
             settingsDarkThemeImageView.setOnClickListener {
-                viewModel.changeTheme(0)
+                viewModel.acceptTheme(0)
+                requireActivity().recreate()
             }
             settingsLightThemeImageView.setOnClickListener {
-                viewModel.changeTheme(1)
+                viewModel.acceptTheme(1)
+                requireActivity().recreate()
             }
         }
     }
@@ -90,7 +92,7 @@ class SettingsFragment : Fragment() {
             }
 
             currentLanguage.observe(viewLifecycleOwner) {
-                binding.settingsLanguageTextView.text = it.languageName
+                binding.settingsLanguageTextView.text = it.nativeName
             }
 
             selectedThemeId.observe(viewLifecycleOwner) {

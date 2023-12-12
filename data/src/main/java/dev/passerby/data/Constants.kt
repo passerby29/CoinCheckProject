@@ -69,5 +69,6 @@ class Constants(context: Context, languageId: Int = 0) {
     companion object {
         const val LANGUAGE_ID = "langId"
         const val CURRENCY_ID = "currencyId"
+        const val THEME_ID = "themeId"
     }
 }

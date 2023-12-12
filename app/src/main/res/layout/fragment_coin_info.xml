@@ -14,7 +14,6 @@
         android:layout_margin="16dp"
         android:background="@drawable/item_icon_button_background"
         android:src="@drawable/ic_arrow_back"
-        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -44,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/outfit_semi_bold"
-            android:textColor="@color/white"
+            android:textColor="@color/main_text_color"
             android:textSize="24sp"
             tools:text="Bitcoin" />
     </LinearLayout>
@@ -86,7 +85,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/outfit_bold"
             android:includeFontPadding="false"
-            android:textColor="@color/white"
+            android:textColor="@color/main_text_color"
             android:textSize="40sp"
             tools:text="Bitcoin" />
 
@@ -96,7 +95,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/outfit_regular"
             android:includeFontPadding="false"
-            android:textColor="@color/white"
+            android:textColor="@color/main_text_color"
             android:textSize="24sp"
             tools:text="BTC" />
     </LinearLayout>
@@ -146,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_medium"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="36sp"
                 tools:text="$27,243.00" />
 
@@ -156,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_regular"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/plus_text_color"
                 android:textSize="20sp"
                 tools:text="+$4,271 (18,55%)" />
         </LinearLayout>
@@ -179,7 +178,7 @@
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/outfit_regular"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_chart_up"
                 tools:text="Today MAX: \u0024%s" />
@@ -192,7 +191,7 @@
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/outfit_regular"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_chart_down"
                 tools:text="Today MIN: \u0024%s" />
@@ -204,9 +203,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/light_button_background"
+            android:backgroundTint="@color/button_background"
             android:fontFamily="@font/outfit_bold"
             android:text="@string/see_chart_button"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:cornerRadius="4dp"
             app:layout_constraintBottom_toTopOf="@+id/coinInfoCollapsedChartView"
@@ -261,7 +261,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_1d"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />
@@ -282,7 +282,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_1w"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />
@@ -303,7 +303,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_1m"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />
@@ -324,7 +324,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_3m"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />
@@ -345,7 +345,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_6m"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />
@@ -366,7 +366,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_1y"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />
@@ -387,7 +387,7 @@
                 android:padding="0dp"
                 android:text="@string/button_text_all"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/button_text_color_selector"
                 android:textSize="12sp"
                 app:cornerRadius="0dp"
                 app:strokeWidth="0dp" />

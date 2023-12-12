@@ -7,7 +7,9 @@ import dev.passerby.domain.models.LanguageModel
 interface SettingsRepository {
     fun getLanguagesList(): List<LanguageModel>
     fun getCurrenciesList(): List<CurrencyModel>
+    fun getSelectedThemeId(): LiveData<Int>
 
     fun acceptNewLanguage(languageId: Int)
     fun acceptNewCurrency(currencyId: Int)
+    fun acceptNewTheme(themeId: Int)
 }

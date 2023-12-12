@@ -10,5 +10,5 @@
         android:left="0dip"
         android:right="0dip"
         android:top="0dip" />
-    <solid android:color="@color/search_background" />
+    <solid android:color="@color/bottom_sheet_background" />
 </shape>

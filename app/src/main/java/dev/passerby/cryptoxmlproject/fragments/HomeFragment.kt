@@ -124,6 +124,10 @@ class HomeFragment : Fragment() {
                         viewModel.searchCoins(filterString).observe(viewLifecycleOwner) {
                             coinPredictionsAdapter.submitList(it)
                         }
+                        binding.homeSearchPredictionsContainer.elevation = 1f
+                    } else {
+                        coinPredictionsAdapter.submitList(emptyList())
+                        binding.homeSearchPredictionsContainer.elevation = 0f
                     }
                 }
             }

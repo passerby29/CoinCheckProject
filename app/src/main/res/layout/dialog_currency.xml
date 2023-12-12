@@ -24,7 +24,7 @@
             android:fontFamily="@font/outfit_medium"
             android:layout_gravity="center"
             android:text="@string/application_currency_title"
-            android:textColor="@color/white"
+            android:textColor="@color/main_text_color"
             android:textSize="24sp" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:layout_gravity="center_horizontal"
-            app:dividerColor="@color/card_background_color" />
+            app:dividerColor="@color/divider_color" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/currencyRecyclerView"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:layout_gravity="center_horizontal"
-            app:dividerColor="@color/card_background_color" />
+            app:dividerColor="@color/divider_color" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_regular"
                 android:text="@string/cancel_text"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -74,7 +74,7 @@
                 android:enabled="false"
                 android:fontFamily="@font/outfit_regular"
                 android:text="@string/ok_text"
-                android:textColor="@color/text_button_text_selector"
+                android:textColor="@color/text_button_color_selector"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

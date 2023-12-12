@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/search_background"
+    app:cardBackgroundColor="@color/bottom_sheet_background"
     android:layout_marginHorizontal="16dp">
 
     <LinearLayout
@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_bold"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
+                android:layout_marginBottom="2dp"
                 android:textSize="16sp"
                 tools:text="Bitcoin" />
 
@@ -43,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_extra_light"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/main_text_color"
                 android:textSize="14sp"
                 tools:text="BTC" />
         </LinearLayout>
@@ -60,9 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:layout_marginBottom="2dp"
                 android:fontFamily="@font/outfit_regular"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 tools:text="\u002450,669.33" />
 
             <TextView
@@ -70,9 +73,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:layout_marginTop="2dp"
                 android:fontFamily="@font/outfit_regular"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/plus_text_color"
                 tools:text="\u002b20%" />
         </LinearLayout>
     </LinearLayout>

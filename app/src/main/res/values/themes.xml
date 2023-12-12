@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/main_background</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.CryptoXMLProjectNew" parent="Base.Theme.CryptoXMLProjectNew" />
@@ -14,7 +15,8 @@
 
 
     <style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
-        <item name="cornerFamily">rounded</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="cornerSizeBottomRight">16dp</item>
@@ -38,6 +40,6 @@
     </style>
 
     <style name="RadioButtonStyle">
-        <item name="buttonTint">@color/white</item>
+        <item name="buttonTint">@color/main_text_color</item>
     </style>
 </resources>

@@ -29,8 +29,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_bold"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
                 android:textSize="16sp"
+                android:layout_marginBottom="2dp"
                 tools:text="English" />
 
             <TextView
@@ -39,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/outfit_extra_light"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
+                android:textColor="@color/main_text_color"
+                android:layout_marginTop="2dp"
                 android:textSize="14sp"
                 tools:text="English" />
         </LinearLayout>
