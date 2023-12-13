@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
 
         val preferences = getSharedPreferences("AppPreferences", MODE_PRIVATE)
 
@@ -33,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         val conf: Configuration = res.configuration
         conf.setLocale(myLocale)
         res.updateConfiguration(conf, dm)
-
         setContentView(R.layout.activity_main)
     }
 }

@@ -32,4 +32,8 @@
 
     <color name="close_background">#14222B</color>
     <color name="close_color">#FFFFFF</color>
+
+    <color name="gradient_start_color">#F8F9FA</color>
+    <color name="gradient_center_color">#DEE0F8</color>
+    <color name="gradient_end_color">#A3A6F4</color>
 </resources>

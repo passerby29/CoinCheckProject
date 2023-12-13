@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/initialFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -60,4 +60,13 @@
         android:id="@+id/currencyDialog"
         android:name="dev.passerby.cryptoxmlproject.dialogs.CurrencyDialog"
         android:label="CurrencyDialog" />
+    <fragment
+        android:id="@+id/initialFragment"
+        android:name="dev.passerby.cryptoxmlproject.fragments.InitialFragment"
+        android:label="fragment_initial"
+        tools:layout="@layout/fragment_initial" >
+        <action
+            android:id="@+id/action_initialFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

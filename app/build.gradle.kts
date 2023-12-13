@@ -69,4 +69,6 @@ dependencies {
     implementation("com.patrykandpatrick.vico:views:1.12.0")
     //williamChart
     implementation("com.diogobernardino:williamchart:3.10.1")
+    //splashScreen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }
