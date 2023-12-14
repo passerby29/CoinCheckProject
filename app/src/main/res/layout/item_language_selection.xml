@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/coinNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_bold"
@@ -34,6 +35,7 @@
                 tools:text="English" />
 
             <TextView
+                android:id="@+id/coinSymbolTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_light"
@@ -45,6 +47,7 @@
         </LinearLayout>
 
         <RadioButton
+            android:id="@+id/languageRadioButton"
             style="@style/RadioButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
