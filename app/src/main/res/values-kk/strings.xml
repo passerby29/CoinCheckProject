@@ -63,4 +63,5 @@
     </string-array>
     <string name="datePlaceholder">%1s, %2s %3s</string>
     <string name="currency_change_toast">Қолданбаны келесі рет іске қосқанда валюта өзгереді</string>
+    <string name="initial_text">Бұл қосымша криптовалюта тақырыптарына қызығушылық танытатындарға арналған. Онда ең танымал криптовалюталар және олардың бағасы туралы ақпарат бар.</string>
 </resources>

@@ -1,7 +1,6 @@
 package dev.passerby.cryptoxmlproject.fragments
 
 import android.content.Context.MODE_PRIVATE
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +44,9 @@ class InitialFragment : Fragment() {
         }
         binding.initialStartButton.setOnClickListener {
             findNavController().navigate(InitialFragmentDirections.actionInitialFragmentToHomeFragment())
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("firstOpen", false)
+            editor.apply()
         }
     }
 

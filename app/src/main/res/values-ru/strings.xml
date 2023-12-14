@@ -64,4 +64,5 @@
     </string-array>
     <string name="datePlaceholder">%1s, %2s %3s</string>
     <string name="currency_change_toast">Валюта изменится при следующем запуске приложения</string>
+    <string name="initial_text">Это приложение предназначено для тех, кто интересуется темой криптовалют. Он содержит информацию о самых популярных криптовалютах и их ценах.</string>
 </resources>
