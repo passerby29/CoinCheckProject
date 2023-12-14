@@ -19,7 +19,6 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <LinearLayout
-        android:id="@+id/coinInfoCollapsedLogoContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -32,14 +31,12 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/coinInfoCollapsedLogoImageView"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="@null" />
 
         <TextView
-            android:id="@+id/coinInfoCollapsedNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_semi_bold"
@@ -70,7 +67,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -80,7 +76,6 @@
         app:layout_constraintTop_toBottomOf="@+id/coinInfoLogoImageView">
 
         <TextView
-            android:id="@+id/coinInfoNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
@@ -90,7 +85,6 @@
             tools:text="Bitcoin" />
 
         <TextView
-            android:id="@+id/coinInfoSymbolTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_regular"
@@ -108,7 +102,6 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/collapsedContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_sheet_background"
@@ -140,7 +133,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/coinInfoPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_medium"
@@ -150,7 +142,6 @@
                 tools:text="$27,243.00" />
 
             <TextView
-                android:id="@+id/coinInfoChangeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_regular"
@@ -267,7 +258,6 @@
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/coinInfoOneWeekButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -288,7 +278,6 @@
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/coinInfoOneMonthButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -309,7 +298,6 @@
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/coinInfoThreeMonthButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -330,7 +318,6 @@
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/coinInfoSixMonthButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -351,7 +338,6 @@
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/coinInfoOneYearButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -372,7 +358,6 @@
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/coinInfoAllButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="24dp"

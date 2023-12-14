@@ -53,26 +53,4 @@ class CoinMapper {
         websiteUrl = dbModel.websiteUrl,
     )
 
-    fun mapEntityToDbModel(entity: CoinModel) = CoinDbModel(
-        availableSupply = entity.availableSupply,
-        contractAddress = entity.contractAddress,
-        decimals = entity.decimals,
-        exp = entity.exp,
-        icon = entity.icon,
-        id = entity.id,
-        marketCap = entity.marketCap,
-        name = entity.name,
-        price = entity.price,
-        priceBtc = entity.priceBtc,
-        priceChange1d = entity.priceChange1d,
-        priceChange1h = entity.priceChange1h,
-        priceChange1w = entity.priceChange1w,
-        rank = entity.rank,
-        redditUrl = entity.redditUrl,
-        symbol = entity.symbol,
-        totalSupply = entity.totalSupply,
-        twitterUrl = entity.twitterUrl,
-        volume = entity.volume,
-        websiteUrl = entity.websiteUrl
-    )
 }

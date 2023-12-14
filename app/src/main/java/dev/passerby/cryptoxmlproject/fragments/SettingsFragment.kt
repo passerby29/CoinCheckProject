@@ -18,6 +18,7 @@ import dev.passerby.cryptoxmlproject.databinding.FragmentSettingsBinding
 import dev.passerby.cryptoxmlproject.viewmodels.SettingsViewModel
 import java.util.Locale
 
+@Suppress("DEPRECATION")
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null

@@ -1,7 +1,6 @@
 package dev.passerby.cryptoxmlproject.callbacks
 
 import androidx.recyclerview.widget.DiffUtil
-import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.models.FavoriteModel
 
 class FavoritesDiffCallback : DiffUtil.ItemCallback<FavoriteModel>() {

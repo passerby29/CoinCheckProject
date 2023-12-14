@@ -1,6 +1,5 @@
 package dev.passerby.domain.usecases
 
-import dev.passerby.domain.models.CoinModel
 import dev.passerby.domain.models.FavoriteModel
 import dev.passerby.domain.repos.CoinInfoRepository
 

@@ -15,7 +15,6 @@
         android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/coinLogoImageView"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
@@ -28,7 +27,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/coinNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_bold"
@@ -39,7 +37,6 @@
                 tools:text="Bitcoin" />
 
             <TextView
-                android:id="@+id/coinSymbolTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_light"
@@ -58,7 +55,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/coinPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -69,7 +65,6 @@
                 tools:text="\u002450,669.33" />
 
             <TextView
-                android:id="@+id/coinChangeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"

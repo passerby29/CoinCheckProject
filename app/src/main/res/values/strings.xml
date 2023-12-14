@@ -86,4 +86,5 @@
     </string-array>
     <string name="currency_change_toast">The currency will change the next time you launch the application</string>
     <string name="initial_text">This application is intended for those who are interested in cryptocurrency topics. It contains information about the most popular cryptocurrencies and their prices.</string>
+    <string name="start_text" translatable="false">Let\'s start</string>
 </resources>

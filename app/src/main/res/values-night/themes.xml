@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.CryptoXMLProjectNew" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
@@ -7,18 +7,6 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="CustomCardView" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut</item>
-    </style>
-
-
-    <style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeBottomRight">16dp</item>
-        <item name="cornerSizeBottomLeft">16dp</item>
-    </style>
 
     <style name="RoundedImageView">
         <item name="cornerFamily">rounded</item>
@@ -26,14 +14,6 @@
         <item name="cornerSizeTopLeft">8dp</item>
         <item name="cornerSizeBottomRight">8dp</item>
         <item name="cornerSizeBottomLeft">8dp</item>
-    </style>
-
-    <style name="RoundImageView">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">500dp</item>
-        <item name="cornerSizeTopLeft">500dp</item>
-        <item name="cornerSizeBottomRight">500dp</item>
-        <item name="cornerSizeBottomLeft">500dp</item>
     </style>
 
     <style name="RadioButtonStyle">
